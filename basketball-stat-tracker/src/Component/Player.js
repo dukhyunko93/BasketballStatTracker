@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import Player from '../Component/Player'
-import { FormControl, InputLabel, Input, MenuItem, Select} from '@material-ui/core';
+import { Box, FormControl, InputLabel, Input, MenuItem, Select, Button} from '@material-ui/core';
+import HighlightOff from '@material-ui/icons/HighlightOff';
 
 class HomeTeam extends Component {
     state = {
@@ -8,20 +9,24 @@ class HomeTeam extends Component {
         jerseyNumber: "",
         position: "",
     }
-    
+
     handleChange = e => {
         this.setState({[e.target.name]: e.target.value}, () => {
             this.props.updatePlayerInfo(this.props.id, this.state)
         })
     }
 
+    deletePlayer = e => {
+        this.props.deletePlayer(this.props.id)
+    }
+
     render(){
         return (
             <>
-                <div>
+                <Box display="flex">
                     <FormControl>
                         <InputLabel>Player Name</InputLabel>
-                        <Input name="playerName" value={this.state.playerName} onChange={this.handleChange} />
+                        <Input id="player-name" name="playerName" value={this.state.playerName} onChange={this.handleChange} />
                     </FormControl>
                     <FormControl>
                         <InputLabel>Jersey Number</InputLabel>
@@ -37,7 +42,10 @@ class HomeTeam extends Component {
                             <MenuItem value={"C"}>C</MenuItem>
                         </Select>
                     </FormControl>
-                </div>
+                    <Button style={{minWidth: 10, position: "relative", marginTop: 15}} onClick={this.deletePlayer}>
+                        <HighlightOff style={{color:"#ff6961"}} />
+                    </Button>
+                </Box>
             </>
         )
     }
