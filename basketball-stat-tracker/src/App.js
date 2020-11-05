@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import './App.css';
-import { FormControl, InputLabel, Input, FormHelperText, TextField, Button} from '@material-ui/core';
+import AwayTeam from './Container/AwayTeam'
+import HomeTeam from './Container/HomeTeam'
 
 class App extends Component{
   state = {
@@ -17,7 +18,18 @@ class App extends Component{
     return (
       <div className="App">
         <h1>Welcome to Free Basketball Stat Tracker</h1>
-        <form className="initial-input" autoComplete="off">
+        <h3>Please enter team information to begin</h3>
+        <form className="team-form">
+          <div className="home-team-form">
+            <HomeTeam />
+          </div>
+          <div className="away-team-form">
+            <AwayTeam />
+          </div>
+          <button id="submit-btn">Submit</button>
+        </form>
+
+        {/* <form className="initial-input" autoComplete="off">
           <FormControl>
             <InputLabel id="home-team">Home Team</InputLabel>
             <Input name="homeTeam" value={this.state.homeTeam} onChange={this.handleChange} />
@@ -45,7 +57,7 @@ class App extends Component{
           <Button>
             Submit
           </Button>
-        </form>
+        </form> */}
       </div>
     );
   }
