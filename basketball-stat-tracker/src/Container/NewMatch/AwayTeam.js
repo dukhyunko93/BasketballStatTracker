@@ -1,33 +1,26 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Player from '../Component/Player'
+import Player from './Player'
 import { FormControl, InputLabel, Input, FormHelperText, Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
     margin: {
       margin: theme.spacing(1),
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(3),
     },
     textField: {
       width: '25ch',
     },
 }));
 
-function HomeTeam (props){
+function AwayTeam (props){
     const classes = useStyles();
     let htmlId = nextId();
 
     const addPlayer = () => {
-        props.setHomeTeamPlayers([
-            ...props.homeTeamPlayers,{
+        props.setAwayTeamPlayers([
+            ...props.awayTeamPlayers,{
                 id: htmlId,
                 firstName: "",
                 lastName: "",
@@ -38,9 +31,9 @@ function HomeTeam (props){
     }
 
     const renderPlayers = () => {
-        return props.homeTeamPlayers.map(player => 
-            <Player
-                team="home"
+        return props.awayTeamPlayers.map(player => 
+            <Player 
+                team="away"
                 key={player.id}
                 id={player.id}
                 firstName={player.firstName}
@@ -56,10 +49,10 @@ function HomeTeam (props){
     return (
         <>
             <div>
-                <h2>Home Team Roster</h2>
-                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
-                    <InputLabel>Home Team</InputLabel>
-                    <Input id="home-team" name="homeTeam" value={props.homeTeamName} onChange={(e) => props.setHomeTeamName(e.target.value)} />
+                <h2>Away Team Roster</h2>
+                <FormControl className={clsx(classes.margin, classes.textField)}>
+                    <InputLabel>Away Team</InputLabel>
+                    <Input id="away-team" name="awayTeam" value={props.awayTeamName} onChange={(e) => props.setAwayTeamName(e.target.value)} />
                     <FormHelperText>Type the team name.</FormHelperText>
                 </FormControl>
             </div>
@@ -69,4 +62,4 @@ function HomeTeam (props){
     )
 }
 
-export default HomeTeam;
+export default AwayTeam;

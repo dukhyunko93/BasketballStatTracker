@@ -1,11 +1,16 @@
 import React from 'react';
-import NewMatchForm from './Container/NewMatchForm'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from './Container/Navbar'
+import HomePage from './Container/HomePage'
+import NewMatchForm from './Container/NewMatch/NewMatchForm'
 
 function App(){
     return (
-      <>
-        <NewMatchForm />
-      </>
+      <Router>
+        <Navbar />
+        <Route exact path="/" render={() => <HomePage />} />
+        <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
+      </Router>
     );
 }
 

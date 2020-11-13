@@ -1,22 +1,15 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, FormControl, InputLabel, Input, MenuItem, Select, Button} from '@material-ui/core';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
     margin: {
       margin: theme.spacing(1),
     },
     withoutLabel: {
-      marginTop: theme.spacing(3),
-    },
-    textField: {
-      width: '25ch',
+      marginTop: theme.spacing(0),
     },
     inputField: {
         width: "120px",
@@ -41,7 +34,7 @@ function Player (props){
                     <Input name="lastName" value={props.lastName} onChange={onChange} />
                 </FormControl>
                 <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
-                    <InputLabel>Jersey Number</InputLabel>
+                    <InputLabel>Jersey #</InputLabel>
                     <Input alue={props.jerseyNumber} onChange={onChange} />
                 </FormControl>
                 <FormControl className={clsx(classes.withoutLabel, classes.inputField)}>

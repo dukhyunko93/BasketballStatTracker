@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './NewMatchForm.css';
 import AwayTeam from './AwayTeam';
 import HomeTeam from './HomeTeam';
-import Player from '../Component/Player';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 
@@ -70,8 +69,6 @@ function NewMatchForm(){
 
     return (
         <div className="new-match-form">
-            <h1>Welcome to Free Basketball Stat Tracker</h1>
-            <h3>Please enter team information to begin</h3>
             <div>
                 <Button id="submit-btn" onClick={submitHandler}>Submit Teams</Button>
                 <div className="team-form-container">
