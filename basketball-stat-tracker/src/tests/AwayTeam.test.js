@@ -12,6 +12,6 @@ describe("Away Team Roster Testing", () => {
     wrapper = shallow(<AwayTeam />);
   })
   test("renders Away page", () => {
-    expect(wrapper.find('h1').text()).toContain("Away Team Roster");
+    expect(wrapper.find('h2').text()).toContain("Away Team Roster");
   });
 });

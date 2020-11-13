@@ -1,73 +1,72 @@
-import {Component} from 'react';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import Player from '../Component/Player'
-import nextId from "react-id-generator";
 import { FormControl, InputLabel, Input, FormHelperText, Button} from '@material-ui/core';
+import nextId from "react-id-generator";
 
-class HomeTeam extends Component {
-    state = {
-        homeTeam: "",
-        homeTeamPlayers: [],
-        playerComponent: [],
-    }
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    margin: {
+      margin: theme.spacing(1),
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '25ch',
+    },
+}));
 
-    htmlId = nextId();
+function HomeTeam (props){
+    const classes = useStyles();
+    let htmlId = nextId();
 
-    handleChange = e => {
-        this.setState({[e.target.name]: e.target.value})
-    }
-
-    updatePlayerInfo = (id, info) => {
-        this.setState(prevState => ({
-            homeTeamPlayers: prevState.homeTeamPlayers.map(
-              player => player.id === id ? { ...player, playerName: info.playerName, jerseyNumber: info.jerseyNumber, position: info.position } : player
-            )
-        }))
-    }
-
-    deletePlayer = (id) => {
-        let players = this.state.homeTeamPlayers.filter(player => player.id !== id)
-        let playerComponents = this.state.playerComponent.filter(component => component.props.id !== id)
-        this.setState({
-            homeTeamPlayers: players,
-            playerComponent: playerComponents,
-        })
-    }
-
-    addPlayers = (htmlId) => {
-        this.setState({
-            playerComponent: [...this.state.playerComponent, 
-                <Player 
-                    key={this.state.homeTeamPlayers.length} 
-                    id={htmlId} 
-                    updatePlayerInfo={this.updatePlayerInfo}
-                    deletePlayer={this.deletePlayer}
-                />
-            ],
-            homeTeamPlayers: [...this.state.homeTeamPlayers, {
-                id: htmlId, 
-                playerName: "",
+    const addPlayer = () => {
+        props.setHomeTeamPlayers([
+            ...props.homeTeamPlayers,{
+                id: htmlId,
+                firstName: "",
+                lastName: "",
                 jerseyNumber: "",
                 position: "",
-            }]
-        })
+            }
+        ])
     }
 
-    render(){
-        return (
-            <>
-                <div>
-                    <h1>Home Team Roster</h1>
-                    <FormControl>
-                        <InputLabel>Home Team</InputLabel>
-                        <Input id="home-team" name="homeTeam" value={this.state.homeTeam} onChange={this.handleChange} />
-                        <FormHelperText>Type the team name.</FormHelperText>
-                    </FormControl>
-                </div>
-                {this.state.playerComponent}
-                <Button id="add-player" onClick={this.addPlayers} >Add Player</Button>
-            </>
-        )
+    const renderPlayers = () => {
+        return props.homeTeamPlayers.map(player => 
+            <Player
+                team="home"
+                key={player.id}
+                id={player.id}
+                firstName={player.firstName}
+                lastName={player.lastName}
+                jerseyNumber={player.jerseyNumber}
+                position={player.position}
+                updatePlayerInfo={props.updatePlayerInfo}
+                deletePlayer={props.deletePlayer}
+            />
+        );
     }
+
+    return (
+        <>
+            <div>
+                <h2>Home Team Roster</h2>
+                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                    <InputLabel>Home Team</InputLabel>
+                    <Input id="home-team" name="homeTeam" value={props.homeTeamName} onChange={(e) => props.setHomeTeamName(e.target.value)} />
+                    <FormHelperText>Type the team name.</FormHelperText>
+                </FormControl>
+            </div>
+            {renderPlayers()}
+            <Button id="add-player" onClick={addPlayer} >Add Player</Button>
+        </>
+    )
 }
 
 export default HomeTeam;

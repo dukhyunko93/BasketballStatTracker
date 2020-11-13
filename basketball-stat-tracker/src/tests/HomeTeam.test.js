@@ -14,18 +14,13 @@ describe("Home Team Roster Testing", () => {
     wrapper = shallow(<HomeTeam />);
   })
   test("renders home page", () => {
-    expect(wrapper.find('h1').text()).toContain("Home Team Roster");
+    expect(wrapper.find('h2').text()).toContain("Home Team Roster");
   });
-
-  test("render home team name", () => {
-    wrapper.find("#home-team").simulate('change', {target: {name: "homeTeam", value:"StrawHats"}})
-    expect(wrapper.find("#home-team").props().value).toBe("StrawHats")
-  })
 
   test("add player button", () => {
     wrapper.find("#add-player").simulate("click")
     expect(wrapper.state("homeTeamPlayers").length).toBe(1)
-    expect(wrapper.state("playerComponenet").length).toBe(1)
+    expect(wrapper.state("playerComponent").length).toBe(1)
   })
   
 });

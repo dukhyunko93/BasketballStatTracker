@@ -1,72 +1,72 @@
-import {Component} from 'react';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import Player from '../Component/Player'
 import nextId from "react-id-generator";
 import { FormControl, InputLabel, Input, FormHelperText, Button} from '@material-ui/core';
 
-class AwayTeam extends Component {
-    state = {
-        awayTeam: "",
-        awayTeamPlayers: [],
-        playerComponent: [],
-    }
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    margin: {
+      margin: theme.spacing(1),
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '25ch',
+    },
+}));
 
-    htmlId = nextId();
+function AwayTeam (props){
+    const classes = useStyles();
+    let htmlId = nextId();
 
-    handleChange = e => {
-        this.setState({[e.target.name]: e.target.value})
-    }
-
-    updatePlayerInfo = (id, info) => {
-        this.setState(prevState => ({
-            awayTeamPlayers: prevState.awayTeamPlayers.map(
-              player => player.id === id ? { ...player, playerName: info.playerName, jerseyNumber: info.jerseyNumber, position: info.position } : player
-            )
-          }), () => console.log(this.state.awayTeamPlayers))
-    }
-
-    deletePlayer = (id) => {
-        let players = this.state.awayTeamPlayers.filter(player => player.id !== id)
-        let playerComponents = this.state.playerComponent.filter(component => component.props.id !== id)
-        this.setState({
-            awayTeamPlayers: players,
-            playerComponent: playerComponents,
-        })
-    }
-
-    addPlayers = (htmlId) => {
-        this.setState({
-            playerComponent: [...this.state.playerComponent, 
-                <Player 
-                    key={this.state.awayTeamPlayers.length} 
-                    id={htmlId} 
-                    updatePlayerInfo={this.updatePlayerInfo}
-                    deletePlayer={this.deletePlayer}
-                />
-            ],
-            awayTeamPlayers: [...this.state.awayTeamPlayers, {
-                id: htmlId, 
-                playerName: "",
+    const addPlayer = () => {
+        props.setAwayTeamPlayers([
+            ...props.awayTeamPlayers,{
+                id: htmlId,
+                firstName: "",
+                lastName: "",
                 jerseyNumber: "",
                 position: "",
-            }]
-        })
+            }
+        ])
     }
-    render(){
-        return (
-            <>
-                <div>
-                    <h1>Away Team Roster</h1>
-                    <FormControl>
-                        <InputLabel>Away Team</InputLabel>
-                        <Input id="away-team" name="awayTeam" value={this.state.awayTeam} onChange={this.handleChange} />
-                        <FormHelperText>Type the team name.</FormHelperText>
-                    </FormControl>
-                </div>
-                {this.state.playerComponent}
-                <Button id="add-player" onClick={this.addPlayers} >Add Player</Button>
-            </>
-        )
+
+    const renderPlayers = () => {
+        return props.awayTeamPlayers.map(player => 
+            <Player 
+                team="away"
+                key={player.id}
+                id={player.id}
+                firstName={player.firstName}
+                lastName={player.lastName}
+                jerseyNumber={player.jerseyNumber}
+                position={player.position}
+                updatePlayerInfo={props.updatePlayerInfo}
+                deletePlayer={props.deletePlayer}
+            />
+        );
     }
+
+    return (
+        <>
+            <div>
+                <h2>Away Team Roster</h2>
+                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                    <InputLabel>Away Team</InputLabel>
+                    <Input id="away-team" name="awayTeam" value={props.awayTeamName} onChange={(e) => props.setAwayTeamName(e.target.value)} />
+                    <FormHelperText>Type the team name.</FormHelperText>
+                </FormControl>
+            </div>
+            {renderPlayers()}
+            <Button id="add-player" onClick={addPlayer} >Add Player</Button>
+        </>
+    )
 }
 
 export default AwayTeam;

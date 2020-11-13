@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Input from "../Container/InputForm";
+import NewMatchForm from "../Container/NewMatchForm";
 
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe("Initial input form testing", () => {
   let wrapper; 
   beforeEach(() => {
-    wrapper = shallow(<Input />);
+    wrapper = shallow(<NewMatchForm />);
   });
 
   test("renders home page", () => {
@@ -17,6 +17,6 @@ describe("Initial input form testing", () => {
   });
 
   test("render a submit button", () => {
-    expect(wrapper.find("#submit-btn").text()).toBe("Submit");
+    expect(wrapper.find("#submit-btn").text()).toBe("Submit Teams");
   });
 });

@@ -1,15 +1,12 @@
-import {Component} from 'react';
-import './App.css';
-import InputForm from './Container/InputForm'
+import React from 'react';
+import NewMatchForm from './Container/NewMatchForm'
 
-class App extends Component{
-  render(){
+function App(){
     return (
       <>
-        <InputForm />
+        <NewMatchForm />
       </>
     );
-  }
 }
 
 export default App;

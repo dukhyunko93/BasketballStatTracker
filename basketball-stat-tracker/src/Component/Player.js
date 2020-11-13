@@ -1,54 +1,65 @@
-import {Component} from 'react';
-import Player from '../Component/Player'
+import React, { useReducer } from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import { Box, FormControl, InputLabel, Input, MenuItem, Select, Button} from '@material-ui/core';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 
-class HomeTeam extends Component {
-    state = {
-        playerName: "",
-        jerseyNumber: "",
-        position: "",
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    margin: {
+      margin: theme.spacing(1),
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '25ch',
+    },
+    inputField: {
+        width: "120px",
+    }
+}));
+function Player (props){
+    const classes = useStyles();
+    
+    const onChange = (e) => {
+        props.updatePlayerInfo(props.id, e.target, props.team)
     }
 
-    handleChange = e => {
-        this.setState({[e.target.name]: e.target.value}, () => {
-            this.props.updatePlayerInfo(this.props.id, this.state)
-        })
-    }
-
-    deletePlayer = e => {
-        this.props.deletePlayer(this.props.id)
-    }
-
-    render(){
-        return (
-            <>
-                <Box display="flex">
-                    <FormControl>
-                        <InputLabel>Player Name</InputLabel>
-                        <Input id="player-name" name="playerName" value={this.state.playerName} onChange={this.handleChange} />
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel>Jersey Number</InputLabel>
-                        <Input name="jerseyNumber" value={this.state.jerseyNumber} onChange={this.handleChange} />
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel>Position</InputLabel>
-                        <Select style={{width: "80px"}} name="position" value={this.state.position} onChange={this.handleChange}>
-                            <MenuItem value={"PG"}>PG</MenuItem>
-                            <MenuItem value={"SG"}>SG</MenuItem>
-                            <MenuItem value={"SF"}>SF</MenuItem>
-                            <MenuItem value={"PF"}>PF</MenuItem>
-                            <MenuItem value={"C"}>C</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <Button style={{minWidth: 10, position: "relative", marginTop: 15}} onClick={this.deletePlayer}>
-                        <HighlightOff style={{color:"#ff6961"}} />
-                    </Button>
-                </Box>
-            </>
-        )
-    }
+    return (
+        <>
+            <Box display="flex">
+                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                    <InputLabel>First Name</InputLabel>
+                    <Input name="firstName" value={props.firstName} onChange={onChange} />
+                </FormControl>                                
+                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                    <InputLabel>Last Name</InputLabel>
+                    <Input name="lastName" value={props.lastName} onChange={onChange} />
+                </FormControl>
+                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                    <InputLabel>Jersey Number</InputLabel>
+                    <Input alue={props.jerseyNumber} onChange={onChange} />
+                </FormControl>
+                <FormControl className={clsx(classes.withoutLabel, classes.inputField)}>
+                    <InputLabel>Position</InputLabel>
+                    <Select name="position" value={props.position} onChange={onChange}>
+                        <MenuItem value={"PG"}>PG</MenuItem>
+                        <MenuItem value={"SG"}>SG</MenuItem>
+                        <MenuItem value={"SF"}>SF</MenuItem>
+                        <MenuItem value={"PF"}>PF</MenuItem>
+                        <MenuItem value={"C"}>C</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button style={{minWidth: 10, position: "relative", marginTop: 30}} onClick={() => props.deletePlayer(props.id, props.team)}>
+                    <HighlightOff style={{color:"#ff6961"}} />
+                </Button>
+            </Box>
+        </>
+    )
 }
 
-export default HomeTeam;
+export default Player;
