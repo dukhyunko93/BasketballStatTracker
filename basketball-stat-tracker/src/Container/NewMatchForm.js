@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import './NewMatchForm.css';
-import AwayTeam from './AwayTeam';
-import HomeTeam from './HomeTeam';
+import AwayTeam from '../component/AwayTeam';
+import HomeTeam from '../component/HomeTeam';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 
 function NewMatchForm(){
-  
     let htmlId = nextId();
 
     const updatePlayerInfo = (id, info, team) => {
@@ -27,7 +27,6 @@ function NewMatchForm(){
                 )
             )
         }
-
     }
     
     const deletePlayer = (id, team) => {
@@ -70,7 +69,6 @@ function NewMatchForm(){
     return (
         <div className="new-match-form">
             <div>
-                <Button id="submit-btn" onClick={submitHandler}>Submit Teams</Button>
                 <div className="team-form-container">
                     <div className="team-form">
                         <HomeTeam 
@@ -93,6 +91,9 @@ function NewMatchForm(){
                         />
                     </div>
                 </div>
+            </div>
+            <div id="submit-btn">
+                <Button onClick={submitHandler}>Submit Teams</Button>
             </div>
         </div>
     );

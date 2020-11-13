@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Navbar from './Container/Navbar'
-import HomePage from './Container/HomePage'
-import NewMatchForm from './Container/NewMatch/NewMatchForm'
+import Navbar from './container/Navbar'
+import HomePage from './container/HomePage'
+import NewMatchForm from './container/NewMatchForm'
 
 function App(){
     return (

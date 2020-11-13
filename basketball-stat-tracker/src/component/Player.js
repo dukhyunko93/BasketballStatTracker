@@ -47,7 +47,7 @@ function Player (props){
                         <MenuItem value={"C"}>C</MenuItem>
                     </Select>
                 </FormControl>
-                <Button style={{minWidth: 10, position: "relative", marginTop: 30}} onClick={() => props.deletePlayer(props.id, props.team)}>
+                <Button style={{minWidth: 10, position: "relative"}} onClick={() => props.deletePlayer(props.id, props.team)}>
                     <HighlightOff style={{color:"#ff6961"}} />
                 </Button>
             </Box>
