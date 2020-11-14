@@ -5,13 +5,13 @@ import HomePage from './container/HomePage'
 import NewMatchForm from './container/NewMatchForm'
 import StatSheet from './container/StatSheet'
 
-function App(){
+function App(props){
     return (
       <Router>
         <Navbar />
         <Route exact path="/" render={() => <HomePage />} />
         <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
-        <Route exact path="/statsheet" render={() => <StatSheet />} />
+        <Route exact path="/statsheet" render={() => <StatSheet match={props.match}/>} />
       </Router>
     );
 }

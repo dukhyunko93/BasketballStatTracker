@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     withoutLabel: {
       marginTop: theme.spacing(0),
     },
+    textField: {
+      width: '20ch',
+    },
     inputField: {
         width: "120px",
     }

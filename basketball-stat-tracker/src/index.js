@@ -3,24 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux' //applyMiddleware
-import { Provider } from 'react-redux';
-// import createSagaMiddleware from 'redux-saga'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider, connect } from 'react-redux';
+import createSagaMiddleware from 'redux-saga'
 import manageMatch from './reducer/ManageMatch'
-// import { rootSaga } from './sagas'
+import rootSaga from './sagas'
 
-// const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   manageMatch,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  // applyMiddleware(sagaMiddleware)
+  applyMiddleware(sagaMiddleware)
 )
-// const action = type => store.dispatch({type})
+sagaMiddleware.run(rootSaga)
+
+const ConnectedApp = connect((state) => {
+  return state;
+})(App);
 
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App />
+            <ConnectedApp />
         </React.StrictMode>
     </Provider>,
   document.getElementById('root')

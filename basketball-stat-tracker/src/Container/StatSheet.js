@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import { connect } from "react-redux";
+import React from 'react';
 
 function StatSheet(props){
     console.log(props)
     return(
         <div>
-            Hello!
+            Stat Sheet!
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return state
-  }
-
-export default connect(mapStateToProps)(StatSheet)
+export default StatSheet
