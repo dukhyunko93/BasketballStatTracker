@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { saveMatch } from "../action/Match";
 import './NewMatchForm.css';
-import AwayTeam from '../component/AwayTeam';
-import HomeTeam from '../component/HomeTeam';
+import AwayTeam from '../component/AwayTeamForm';
+import HomeTeam from '../component/HomeTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 import { Redirect } from "react-router";

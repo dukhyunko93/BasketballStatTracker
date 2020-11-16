@@ -60,7 +60,7 @@ const matchExample = {
         position: "SG"
         },
     ],
-    awayTeam: "Lakeres",
+    awayTeam: "Lakers",
     awayTeamPlayers: [
         {            
         id: uuid(),

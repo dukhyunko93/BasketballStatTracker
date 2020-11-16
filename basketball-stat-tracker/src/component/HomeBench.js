@@ -8,43 +8,41 @@ function HomeBench(props){
             {Object.entries(props.columns).map(([columnId, column], index) => {
                 return (
                         <div key={columnId}>
-                            <h2>{column.name}</h2>
                             <Droppable key={columnId} droppableId={columnId}>
                                 {(provided, snapshot) => {
                                     return(
-                                        <div
+                                        <ul 
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                             style={{
-                                                background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
-                                                padding: 4,
+                                                // background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
                                             }}
-                                        >
+                                        >   
+                                            <h5 >{column.area}</h5>
                                             {provided.placeholder}
                                                 {column.players.map((item,index) => {
                                                 return (
                                                     <Draggable key={item.id} draggableId={item.id} index={index}>
                                                         {(provided, snapshot) => {
                                                             return (
-                                                                <div
+                                                                <li
                                                                     className="player"
                                                                     ref={provided.innerRef}
                                                                     {...provided.draggableProps}
                                                                     {...provided.dragHandleProps}
                                                                     style={{
-                                                                        userSelect: "none",
-                                                                        backgroundColor: snapshot.isDragging ? "#263B4A" : "#3d7ab8",
+                                                                        backgroundColor: snapshot.isDragging ? "#263B4A" : "white",
                                                                         ...provided.draggableProps.style
                                                                     }}
                                                                 >
                                                                     {item.jerseyNumber}
-                                                                </div>    
+                                                                </li>    
                                                             );
                                                         }}
                                                     </Draggable>
                                                 );
                                             })}
-                                        </div>
+                                        </ul>
                                     );
                                 }}
                             </Droppable>
