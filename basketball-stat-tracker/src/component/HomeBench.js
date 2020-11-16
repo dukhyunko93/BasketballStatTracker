@@ -3,14 +3,11 @@ import '../container/StatSheet.css';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 function HomeBench(props){
-    const [column, setColumn] = useState(props.benchColumn);
-    
+    const { id, name, players } = props.column
     return(
-        <DragDropContext onDragEnd={result => props.onDragEnd(result, column, setColumn)}>
-            {Object.entries(column).map(([id, column]) => {
-                return (
+        <DragDropContext onDragEnd={result => props.onDragEnd(result, props.column)}>
                     <div key={id}>
-                        <h2>{column.name}</h2>
+                        <h2>{name}</h2>
                         <Droppable key={id} droppableId={id}>
                             {(provided, snapshot) => {
                                 return(
@@ -24,7 +21,7 @@ function HomeBench(props){
                                         }}
                                     >
                                         {provided.placeholder}
-                                            {column.items.map((item,index) => {
+                                            {players.map((item,index) => {
                                             return (
                                                 <Draggable key={item.id} draggableId={item.id} index={index}>
                                                     {(provided, snapshot) => {
@@ -55,8 +52,6 @@ function HomeBench(props){
                             }}
                         </Droppable>
                     </div>
-                );
-            })}
         </DragDropContext>
     )
 }
