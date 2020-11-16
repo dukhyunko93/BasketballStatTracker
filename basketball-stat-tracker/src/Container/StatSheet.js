@@ -3,6 +3,7 @@ import matchExample from "../component/TeamExample";
 import "./StatSheet.css";
 // import Court from "../component/Court";
 import HomeBench from "../component/HomeBench";
+import HomeCourt from "../component/HomeCourt";
 // import AwayBench from "../component/AwayBench";
 import { uuid } from "uuidv4"
 
@@ -16,12 +17,11 @@ const homePlayersArray = () => {
 // };
 
 const homeInfo = {
-    homeBench: {
-        id: uuid(),
+    [uuid()]:{
         name: "Home Bench",
         players: homePlayersArray(),
     },
-    homeCourt: {
+    [uuid()]:{
         name: "Home Court",
         players: [],
     }
@@ -43,51 +43,51 @@ function StatSheet(props){
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     // const [awayColumn, setAwayColumns] = useState(awayInfo);
 
-    const onDragEndHome = (result, columns) => {
+    const onDragEndHome = (result, column) => {
 
         if (!result.destination) return;
         const { source, destination } = result;
-        console.log(columns)
-        console.log(destination)
-        // if (source.droppableId !== destination.droppableId) {
-        //   const sourceColumn = columns[source.droppableId];
-        //   const destColumn = columns[destination.droppableId];
-        //   const sourceItems = [...sourceColumn.items];
-        //   const destItems = [...destColumn.items];
-        //   const [removed] = sourceItems.splice(source.index, 1);
-        //   destItems.splice(destination.index, 0, removed);
-        //   setColumns({
-        //     ...columns,
-        //     [source.droppableId]: {
-        //       ...sourceColumn,
-        //       items: sourceItems
-        //     },
-        //     [destination.droppableId]: {
-        //       ...destColumn,
-        //       items: destItems
-        //     }
-        //   });
-        // } else {
-        //   const column = homeColumn[source.droppableId];
-        //   const copiedItems = [...column.players];
-        //   const [removed] = copiedItems.splice(source.index, 1);
-        //   copiedItems.splice(destination.index, 0, removed)
-        //   setHomeColumns({
-        //     ...columns,
-        //     [source.droppableId]: {
-        //       ...column,
-        //       items: copiedItems
-        //     }
-        //   });
-        // }
+        if (source.droppableId !== destination.droppableId) {
+          const sourceColumn = homeColumn[source.droppableId];
+          const destColumn = homeColumn[destination.droppableId];
+          const sourcePlayers = [...sourceColumn.players];
+          const destPlayers = [...destColumn.players];
+          const [removed] = sourcePlayers.splice(source.index, 1);
+          destPlayers.splice(destination.index, 0, removed);
+          setHomeColumns({
+            ...homeColumn,
+            [source.droppableId]: {
+              ...sourceColumn,
+              players: sourcePlayers
+            },
+            [destination.droppableId]: {
+              ...destColumn,
+              players: destPlayers
+            }
+          });
+        } else {
+          const column = homeColumn[source.droppableId];
+          const copiedPlayers = [...column.players];
+          const [removed] = copiedPlayers.splice(source.index, 1);
+          copiedPlayers.splice(destination.index, 0, removed)
+          setHomeColumns({
+            ...homeColumn,
+            [source.droppableId]: {
+              ...column,
+              players: copiedPlayers
+            }
+          });
+        }
       };
       
 
     return(
-        <div className="bench" >
-            <HomeBench onDragEnd={onDragEndHome} column={homeColumn.homeBench}/>
-            {/* <AwayBench onDragEnd={onDragEnd} column={columns.awayBench}/> */}
-        </div>
+        <>
+            <div className="bench" >
+                <HomeBench onDragEnd={onDragEndHome} columns={homeColumn}/>
+                {/* <AwayBench onDragEnd={onDragEnd} column={columns.awayBench}/> */}
+            </div>
+        </>
     )
 }
 
