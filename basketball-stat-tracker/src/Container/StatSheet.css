@@ -17,19 +17,5 @@ div.court div:nth-child(2) {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    bottom: 0;
-}
-
-div.bench div:nth-child(1) {
-    width: 50%;  
-    margin: 10px;
-    padding: 2.5px;
-    border: 2.5px dashed blue;
-}
-
-div.bench div:nth-child(2) {
-    width: 50%;  
-    margin: 10px;
-    padding: 2.5px;
-    border: 2.5px dashed red;
+    bottom: 10px;
 }
