@@ -37,7 +37,7 @@ function StatSheet(props){
     let homeCourtInfo = homeColumn[Object.keys(homeColumn)[0]].players;
     let awayCourtInfo = awayColumn[Object.keys(awayColumn)[0]].players;
 
-    const onDragEndHome = (result, column) => {
+    const onDragEndHome = (result) => {
         if (!result.destination) return;
         const { source, destination } = result;
         if (source.droppableId !== destination.droppableId) {
@@ -64,13 +64,16 @@ function StatSheet(props){
         }
       };
 
-      const onDragEndAway = (result, column) => {
+      const onDragEndAway = (result) => {
 
         if (!result.destination) return;
         const { source, destination } = result;
         if (source.droppableId !== destination.droppableId) {
           const sourceColumn = awayColumn[source.droppableId];
           const destColumn = awayColumn[destination.droppableId];
+          if(destColumn.area === "Court" && destColumn.players.length >= 5){
+            return;
+          }
           const sourcePlayers = [...sourceColumn.players];
           const destPlayers = [...destColumn.players];
           const [removed] = sourcePlayers.splice(source.index, 1);
@@ -105,7 +108,7 @@ function StatSheet(props){
     return(
       <div className="container" >
           <div className="homeTeamContainer" >
-            <Paper style={{"border-top-left-radius": "20px"}}>
+            <Paper style={{minWidth: "900px",padding: "1px"}}>
               <div className="homeTeamBench">
                 <h5>Home: {matchExample.homeTeam}</h5>
                 <div className="homePlayers">
@@ -119,7 +122,7 @@ function StatSheet(props){
               <h1>Home: 100 Away: 99</h1>
           </div>
           <div className="awayTeamContainer">
-            <Paper style={{"border-top-left-radius": "20px"}}>
+            <Paper style={{minWidth: "900px",padding: "1px"}}>
               <div className="awayTeamBench">
                 <h5>Away: {matchExample.awayTeam}</h5>
                 <div className="awayPlayers">

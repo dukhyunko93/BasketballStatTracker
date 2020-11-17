@@ -9,12 +9,11 @@ import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
-      margin: "10px",
-    width: "100%",
-
+        margin: "10px",
+        width: "100%",
   },
   container:{
-      width: "fit-content"
+        width: "fit-content"
   },
   body:{
 
@@ -22,6 +21,7 @@ const useStyles = makeStyles({
 });
 
 export default function HomeTeamStats(props) {
+    const classes = useStyles();
 
     const createPlayers = () => {
         return props.players.map((players) => 
@@ -43,10 +43,6 @@ export default function HomeTeamStats(props) {
             </TableRow>
         )
     };
-
-    console.log(props.players)
-
-    const classes = useStyles();
 
     return (
         <Container className={classes.container}>

@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 function HomeBench(props){
     return(
-        <DragDropContext onDragEnd={result => props.onDragEnd(result, props.columns)}>
+        <DragDropContext onDragEnd={result => props.onDragEnd(result)}>
             {Object.entries(props.columns).map(([columnId, column], index) => {
                 return (
                         <div key={columnId}>

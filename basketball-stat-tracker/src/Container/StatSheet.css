@@ -42,6 +42,7 @@ li {
     width: fit-content;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 5px;
     display: flex;
     background-color: #779ecb;
     border-top-left-radius: 20px;
@@ -52,6 +53,7 @@ li {
     width: fit-content;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 5px;
     display: flex;
     background-color: #ff6961;
     border-top-left-radius: 20px;
@@ -64,6 +66,8 @@ li {
     margin-left: auto;
     margin-right: auto;
     padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     width: fit-content;
     height: fit-content;
 }
@@ -95,6 +99,8 @@ div.homePlayers div:nth-child(2) ul {
     margin-left: auto;
     margin-right: auto;
     padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     width: fit-content;
     height: fit-content;
 }
