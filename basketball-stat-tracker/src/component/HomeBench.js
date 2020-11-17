@@ -15,7 +15,7 @@ function HomeBench(props){
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                             style={{
-                                                // background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
+                                                background: snapshot.isDraggingOver ? "lightblue" : "#779ecb",
                                             }}
                                         >   
                                             <h5 >{column.area}</h5>

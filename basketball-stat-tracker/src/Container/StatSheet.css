@@ -1,8 +1,8 @@
-.stats{
-    height: 100%;
+body{
+    background-color: #F5F5F5;
 }
 
-h2 {
+h5{
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 5px;
@@ -43,17 +43,29 @@ li {
     margin-right: auto;
     margin-left: auto;
     display: flex;
+    background-color: #779ecb;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 8px 6px -2px black;
 }
 .awayTeamBench{
     width: fit-content;
     margin-right: auto;
     margin-left: auto;
     display: flex;
+    background-color: #ff6961;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 8px 6px -2px black;
 }
 
 /* HOME TEAM STYLES */
 .homeTeamContainer{
-    height: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    width: fit-content;
+    height: fit-content;
 }
 
 div.homePlayers{
@@ -65,7 +77,6 @@ div.homePlayers{
 div.homePlayers ul{
     padding: 5px;
     display: flex;
-    background-color: #779ecb;
 }
 
 div.homePlayers div:nth-child(1) ul {
@@ -81,7 +92,11 @@ div.homePlayers div:nth-child(2) ul {
 
 /* AWAY TEAM STYLES */
 .awayTeamContainer{
-    height: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    width: fit-content;
+    height: fit-content;
 }
 div.awayPlayers{
     display: flex;
@@ -92,7 +107,6 @@ div.awayPlayers{
 div.awayPlayers ul{
     padding: 5px;
     display: flex;
-    background-color: #ff6961;
 }
 
 div.awayPlayers div:nth-child(1) ul {

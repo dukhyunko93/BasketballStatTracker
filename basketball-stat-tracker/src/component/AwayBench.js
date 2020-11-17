@@ -15,7 +15,7 @@ function AwayBench(props){
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                             style={{
-                                                // background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
+                                                background: snapshot.isDraggingOver ? "lightpink" : "#ff6961",
                                             }}
                                         >   
                                             <h5>{column.area}</h5>
