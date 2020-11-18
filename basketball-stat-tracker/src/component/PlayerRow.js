@@ -1,12 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableBody, TableCell, TableRow } from '@material-ui/core';
+import { TableBody, TableCell, TableRow, Button } from '@material-ui/core';
 import './PlayerRow.css'
 
 const useStyles = makeStyles({
-  button:{
-      width: "50%"
-  }
+    button:{
+        minWidth: "25px",
+        minHeight: "25px",
+        padding: "0",
+        borderRadius: "50%",
+        border: "1px solid black",
+        marginRight: "auto",
+        marginLeft: "auto"
+    }
 });
 
 export default function PlayerRow(props) {
@@ -24,28 +30,28 @@ export default function PlayerRow(props) {
         <>
             <TableRow key={props.player.id}>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button className={classes.button}>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <button>-</button>
-                    <button>+</button>
+                    <Button>-</Button>
+                    <Button>+</Button>
                 </TableCell>
                 <TableCell align="center">
                     {props.player.firstName[0]}.{props.player.lastName}
