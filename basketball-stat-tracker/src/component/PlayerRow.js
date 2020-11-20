@@ -1,17 +1,26 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TableBody, TableCell, TableRow, Button } from '@material-ui/core';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import './PlayerRow.css'
 
 const useStyles = makeStyles({
-    button:{
+    buttonFG:{
         minWidth: "25px",
         minHeight: "25px",
         padding: "0",
         borderRadius: "50%",
-        border: "1px solid black",
         marginRight: "auto",
         marginLeft: "auto"
+    },
+    buttonStats:{
+        minWidth: "25px",
+        minHeight: "25px",
+        padding: "0",
+        borderRadius: "50%",
+        marginRight: "5px",
+        marginLeft: "5px",
     }
 });
 
@@ -22,73 +31,75 @@ export default function PlayerRow(props) {
         e.target.innerText++
     }
 
-    const onDoubleClickHandler = (e) => {
-        e.target.innerText = e.target.innerText - 3
-    }
-
+    console.log(props)
     return (
         <>
             <TableRow key={props.player.id}>
                 <TableCell className="point-control">
-                    <Button className={classes.button}>-</Button>
-                    <Button>+</Button>
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <Button>-</Button>
-                    <Button>+</Button>
+                    
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <Button>-</Button>
-                    <Button>+</Button>
+                    
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <Button>-</Button>
-                    <Button>+</Button>
+                    
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <Button>-</Button>
-                    <Button>+</Button>
+                    
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell className="point-control">
-                    <Button>-</Button>
-                    <Button>+</Button>
+                    
+                    <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                    <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell align="center">
+                <TableCell className="point-control">
                     {props.player.firstName[0]}.{props.player.lastName}
                 </TableCell>
-                <TableCell align="center">{props.player.jerseyNumber}</TableCell>
-                <TableCell align="center">{props.player.stats.FGA} / {props.player.stats.FGM}</TableCell>
-                <TableCell align="center">{props.player.stats.ThreePTA} / {props.player.stats.ThreePTM}</TableCell>
-                <TableCell align="center">{props.player.stats.FTA} / {props.player.stats.FTM}</TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">{props.player.jerseyNumber}</TableCell>
+                <TableCell className="point-control">{props.player.stats.FGA} / {props.player.stats.FGM}</TableCell>
+                <TableCell className="point-control">{props.player.stats.ThreePTA} / {props.player.stats.ThreePTM}</TableCell>
+                <TableCell className="point-control">{props.player.stats.FTA} / {props.player.stats.FTM}</TableCell>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.REB}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.AST}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.STL}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.BLK}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.TO}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
-                <TableCell className="point-control" align="center">
-                    <button>-</button>
+                <TableCell className="point-control">
+                    <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {props.player.stats.PF}
-                    <button>+</button>
+                    <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
                 </TableCell>
                 <TableCell align="center">{props.player.stats.PTS}</TableCell>
             </TableRow>

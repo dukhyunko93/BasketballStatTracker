@@ -37,6 +37,7 @@ function StatSheet(props){
     let homeCourtInfo = homeColumn[Object.keys(homeColumn)[0]].players;
     let awayCourtInfo = awayColumn[Object.keys(awayColumn)[0]].players;
 
+    // Drag players from bench to court or vice versa
     const onDragEndHome = (result) => {
         if (!result.destination) return;
         const { source, destination } = result;

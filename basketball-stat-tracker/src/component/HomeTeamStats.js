@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 export default function HomeTeamStats(props) {
     const classes = useStyles();
 
+    // Render each players as a row on the table
     const createPlayers = () => {        
         return props.players.map((player) => <PlayerRow key={player.id} id={player.id} player={player} />)
     };
@@ -32,24 +33,24 @@ export default function HomeTeamStats(props) {
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.cell} align="center">FGA</TableCell>
-                        <TableCell className={classes.cell} align="center">FGM</TableCell>
-                        <TableCell className={classes.cell} align="center">TPA</TableCell>
-                        <TableCell className={classes.cell} align="center">TPM</TableCell>
-                        <TableCell className={classes.cell} align="center">FTA</TableCell>
-                        <TableCell className={classes.cell} align="center">FTM</TableCell>
-                        <TableCell className={classes.cell} align="center">Name</TableCell>
-                        <TableCell className={classes.cell} align="center">#</TableCell>
-                        <TableCell className={classes.cell} align="center">FG</TableCell>
-                        <TableCell className={classes.cell} align="center">3PT</TableCell>
-                        <TableCell className={classes.cell} align="center">FT</TableCell>
-                        <TableCell className={classes.cell} align="center">REB</TableCell>
-                        <TableCell className={classes.cell} align="center">AST</TableCell>
-                        <TableCell className={classes.cell} align="center">STL</TableCell>
-                        <TableCell className={classes.cell} align="center">BLK</TableCell>
-                        <TableCell className={classes.cell} align="center">TO</TableCell>
-                        <TableCell className={classes.cell} align="center">PF</TableCell>
-                        <TableCell className={classes.cell} align="center">PTS</TableCell>
+                        <TableCell className={classes.cell}>FGA</TableCell>
+                        <TableCell className={classes.cell}>FGM</TableCell>
+                        <TableCell className={classes.cell}>TPA</TableCell>
+                        <TableCell className={classes.cell}>TPM</TableCell>
+                        <TableCell className={classes.cell}>FTA</TableCell>
+                        <TableCell className={classes.cell}>FTM</TableCell>
+                        <TableCell className={classes.cell}>Name</TableCell>
+                        <TableCell className={classes.cell}>#</TableCell>
+                        <TableCell className={classes.cell}>FG</TableCell>
+                        <TableCell className={classes.cell}>3PT</TableCell>
+                        <TableCell className={classes.cell}>FT</TableCell>
+                        <TableCell className={classes.cell}>REB</TableCell>
+                        <TableCell className={classes.cell}>AST</TableCell>
+                        <TableCell className={classes.cell}>STL</TableCell>
+                        <TableCell className={classes.cell}>BLK</TableCell>
+                        <TableCell className={classes.cell}>TO</TableCell>
+                        <TableCell className={classes.cell}>PF</TableCell>
+                        <TableCell className={classes.cell}>PTS</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
