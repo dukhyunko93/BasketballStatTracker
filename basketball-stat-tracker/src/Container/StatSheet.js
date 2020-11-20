@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import matchExample from "../component/TeamExample";
 import "./StatSheet.css";
 import HomeBench from "../component/HomeBench";
-import HomeTeamStats from "../component/HomeTeamStats"
+import TeamStatsTable from "../component/TeamStatsTable"
 import AwayBench from "../component/AwayBench";
-import AwayTeamStats from "../component/AwayTeamStats"
 import { uuid } from "uuidv4"
 import { Paper } from "@material-ui/core";
 
@@ -116,7 +115,7 @@ function StatSheet(props){
                     <HomeBench onDragEnd={onDragEndHome} columns={homeColumn}/>
                 </div>
               </div>
-              <HomeTeamStats players={homeCourtInfo}/>
+              <TeamStatsTable players={homeCourtInfo}/>
             </Paper>
           </div>
           <div className="scoreBoard">
@@ -130,7 +129,7 @@ function StatSheet(props){
                     <AwayBench onDragEnd={onDragEndAway} columns={awayColumn}/>
                 </div>
               </div>
-              <AwayTeamStats players={awayCourtInfo}/>
+              <TeamStatsTable players={awayCourtInfo}/>
             </Paper>
           </div>
       </div>

@@ -12,8 +12,8 @@ const matchExample = {
         stats:{
             FGA: 0,
             FGM: 0,
-            ThreePTA: 0,
-            ThreePTM: 0,
+            TPA: 0,
+            TPM: 0,
             FTA: 0,
             FTM: 0,
             REB: 0,
