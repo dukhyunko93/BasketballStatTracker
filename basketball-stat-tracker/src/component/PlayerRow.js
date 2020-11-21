@@ -31,9 +31,9 @@ export default function PlayerRow(props) {
     }
 
     const renderScoreController = () => {
-        let scores = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM"]
-        return scores.map(score => 
-            <TableCell className="point-control">
+        const scores = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM"]
+        return scores.map((score, index) => 
+            <TableCell key={index} className="point-control">
                 <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
                 <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
             </TableCell>
@@ -41,10 +41,11 @@ export default function PlayerRow(props) {
     };
 
     const renderStatSheet = () => {
-        const {REB, AST, STL, BLK, TO, PF, PTS} = props.player.stats
-        const stats = [REB, AST, STL, BLK, TO, PF, PTS]
-        return stats.map(stat => 
-            <TableCell className="point-control">
+        const {REB, AST, STL, BLK, TO, PF} = props.player.stats
+        const stats = [REB, AST, STL, BLK, TO, PF]
+        let uniqueKey = 0;
+        return stats.map((stat, index) => 
+            <TableCell key={index} className="point-control">
                 <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {stat}
                 <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>

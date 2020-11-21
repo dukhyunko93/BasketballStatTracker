@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import matchExample from "../component/TeamExample";
 import "./StatSheet.css";
-import HomeBench from "../component/HomeBench";
+import Bench from "../component/Bench";
 import TeamStatsTable from "../component/TeamStatsTable"
-import AwayBench from "../component/AwayBench";
 import { uuid } from "uuidv4"
 import { Paper } from "@material-ui/core";
+import matchExample from "../component/TeamExample";
 
 const homeInfo = {
     [uuid()]:{
@@ -65,7 +64,6 @@ function StatSheet(props){
       };
 
       const onDragEndAway = (result) => {
-
         if (!result.destination) return;
         const { source, destination } = result;
         if (source.droppableId !== destination.droppableId) {
@@ -112,7 +110,7 @@ function StatSheet(props){
               <div className="homeTeamBench">
                 <h5>Home: {matchExample.homeTeam}</h5>
                 <div className="homePlayers">
-                    <HomeBench onDragEnd={onDragEndHome} columns={homeColumn}/>
+                    <Bench home onDragEnd={onDragEndHome} columns={homeColumn}/>
                 </div>
               </div>
               <TeamStatsTable players={homeCourtInfo}/>
@@ -126,7 +124,7 @@ function StatSheet(props){
               <div className="awayTeamBench">
                 <h5>Away: {matchExample.awayTeam}</h5>
                 <div className="awayPlayers">
-                    <AwayBench onDragEnd={onDragEndAway} columns={awayColumn}/>
+                    <Bench away onDragEnd={onDragEndAway} columns={awayColumn}/>
                 </div>
               </div>
               <TeamStatsTable players={awayCourtInfo}/>

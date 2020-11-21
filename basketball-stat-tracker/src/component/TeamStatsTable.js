@@ -15,11 +15,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function TeamStats(props) {
+export default function TeamStatsTable(props) {
     const classes = useStyles();
 
     // Render each players as a row on the table
-    const createPlayers = () => {        
+    const createPlayers = () => {
         return props.players.map((player) => <PlayerRow key={player.id} id={player.id} player={player} />)
     };
     
@@ -27,7 +27,7 @@ export default function TeamStats(props) {
     const createHeaders = () => {
         let headers = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM", "NAME" , "#", "FG", "3PT", "FT", "REB", "AST", "STL", "BLK", "TO", "PF", "PTS"]
         return headers.map(header => 
-            <TableCell className="table-header-cell">{header}</TableCell>
+            <TableCell key={header} className="table-header-cell">{header}</TableCell>
         )
     }
     return (
