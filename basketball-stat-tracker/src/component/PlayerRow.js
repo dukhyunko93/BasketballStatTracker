@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableBody, TableCell, TableRow, Button } from '@material-ui/core';
+import { TableCell, TableRow, Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
@@ -24,59 +24,84 @@ const useStyles = makeStyles({
 });
 
 export default function PlayerRow(props) {
-    const classes = useStyles();
+    const{player, team} = props
 
+    const classes = useStyles();
 
     const statCategory = { 0: "REB", 1: "AST", 2: "STL", 3: "BLK", 4: "TO", 5: "PF" }
     const addStat = (index) => {
         let stat = statCategory[index];
-        let statValue = props.player.stats[stat] + 1;
-        props.updateStats(props.player, props.team, stat, statValue);
+        player.stats[stat]++;
+        props.updateStats(player, team);
     }
 
     const subtractStat = (index) => {
         let stat = statCategory[index];
-        let statValue = props.player.stats[stat] - 1;
-        if(statValue < 0) statValue = 0;
-        props.updateStats(props.player, props.team, stat, statValue);
+        player.stats[stat]--;
+        if(player.stats[stat] < 0) player.stats[stat] = 0;
+        props.updateStats(player, team);
+    }
+
+    const addScore = (type) => {
+        if(type[2] === "M"){
+            let attempt = type.substring(0,2) + "A"
+            player.stats[type]++;
+            player.stats[attempt]++;
+        } else {
+            player.stats[type]++;
+        }
+        console.log(player.stats["PTS"])
+        props.updateStats(player, team)
+    }
+
+    const subtractScore = type => {
+        if(type[2] === "M"){
+            let attempt = type.substring(0,2) + "A"
+            player.stats[type]--;
+            player.stats[attempt]--;
+            if(player.stats[attempt] < 0) player.stats[attempt] = 0;
+        } else {
+            player.stats[type]--;
+        }
+        if(player.stats[type] < 0) player.stats[type] = 0;
+        props.updateStats(player, team)
     }
 
     const renderScoreController = () => {
-        const scores = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM"]
-        return scores.map((score, index) => 
+        const scoreCategory = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM"]
+        return scoreCategory.map((type, index) => 
             <TableCell key={index} className="point-control">
-                <Button className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
-                <Button className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
+                <Button onClick={() => subtractScore(type)} className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
+                <Button onClick={() => addScore(type)} className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
             </TableCell>
         );
     };
 
     const renderStatSheet = () => {
-        const {REB, AST, STL, BLK, TO, PF} = props.player.stats
+        const {REB, AST, STL, BLK, TO, PF} = player.stats
         const stats = [REB, AST, STL, BLK, TO, PF]
-        let uniqueKey = 0;
         return stats.map((stat, index) => 
             <TableCell key={index} className="point-control">
-                <Button onClick={e => subtractStat(index)} className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
+                <Button onClick={() => subtractStat(index)} className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {stat}
-                <Button onClick={e => addStat(index)} className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
+                <Button onClick={() => addStat(index)} className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
             </TableCell>
         );
     };
 
     return (
         <>
-            <TableRow key={props.player.id}>
+            <TableRow key={player.id}>
                 {renderScoreController()}
                 <TableCell className="point-control">
-                    {props.player.firstName[0]}.{props.player.lastName}
+                    {player.firstName[0]}.{player.lastName}
                 </TableCell>
-                <TableCell className="point-control">{props.player.jerseyNumber}</TableCell>
-                <TableCell className="point-control">{props.player.stats.FGA} / {props.player.stats.FGM}</TableCell>
-                <TableCell className="point-control">{props.player.stats.TPA} / {props.player.stats.TPM}</TableCell>
-                <TableCell className="point-control">{props.player.stats.FTA} / {props.player.stats.FTM}</TableCell>
+                <TableCell className="point-control">{player.jerseyNumber}</TableCell>
+                <TableCell className="point-control">{player.stats.FGM} / {player.stats.FGA}</TableCell>
+                <TableCell className="point-control">{player.stats.TPM} / {player.stats.TPA}</TableCell>
+                <TableCell className="point-control">{player.stats.FTM} / {player.stats.FTA}</TableCell>
                 {renderStatSheet()}
-                <TableCell align="center">{props.player.stats.PTS}</TableCell>
+                <TableCell align="center">{player.stats.PTS}</TableCell>
             </TableRow>
         </>
     );

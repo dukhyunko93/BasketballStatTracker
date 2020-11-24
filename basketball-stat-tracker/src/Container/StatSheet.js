@@ -6,21 +6,13 @@ import { Paper } from "@material-ui/core";
 import matchExample from "../component/TeamExample";
 
 const homeInfo = {
-    "Court":{
-        players: [],
-    },
-    "Bench":{
-        players: matchExample.homeTeamPlayers,
-    }
+    "Court":[],
+    "Bench": matchExample.homeTeamPlayers,
 }
 
 const awayInfo = {
-    "Court":{
-        players: [],
-    },
-    "Bench":{
-        players: matchExample.awayTeamPlayers,
-    }
+    "Court":[],
+    "Bench":matchExample.awayTeamPlayers,
 }
 
 
@@ -28,33 +20,18 @@ function StatSheet(){
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 
-    const updateSubStats = (updatePlayer, team, statCategory, statValue) => {
+    const updateStats = (updatedPlayer, team) => {
         if (team === "home"){
-            let foundPlayer = homeColumn["Court"].players.find(player => player.id === updatePlayer.id);
-            foundPlayer.stats[statCategory] = statValue
-            let filteredPlayers = homeColumn["Court"].players.filter(player => player.id !== updatePlayer.id)
+            let filteredPlayers = homeColumn["Court"].filter(player => player.id !== updatedPlayer.id)
             setHomeColumns({
                 ...homeColumn,
-                ["Court"]:{
-                    players: [
-                        ...filteredPlayers,
-                        foundPlayer
-                    ]
-                }
+                "Court": [...filteredPlayers, updatedPlayer]
             })
         } else {
-            let foundPlayer = awayColumn["Court"].players.find(player => player.id === updatePlayer.id);
-            console.log(foundPlayer)
-            foundPlayer.stats[statCategory] = statValue
-            let filteredPlayers = awayColumn["Court"].players.filter(player => player.id !== updatePlayer.id)
+            let filteredPlayers = awayColumn["Court"].filter(player => player.id !== updatedPlayer.id)
             setAwayColumns({
                 ...awayColumn,
-                ["Court"]:{
-                    players: [
-                        ...filteredPlayers,
-                        foundPlayer
-                    ]
-                }
+                "Court":[...filteredPlayers, updatedPlayer]
             })
         }
     }
@@ -62,61 +39,33 @@ function StatSheet(){
     // Drag players from bench to court or vice versa
     const onDragEnd = (result, team) => {
         if (!result.destination) return;
-        const { source, destination } = result;
+        const { source, destination, draggableId } = result;
         if (team === "home"){
-        if (source.droppableId !== destination.droppableId) {
-            const sourceColumn = homeColumn[source.droppableId];
-            const destColumn = homeColumn[destination.droppableId];
-            if(destination.droppableId === "Court" && destColumn.players.length >= 5) return;
-            const sourcePlayers = [...sourceColumn.players];
-            const destPlayers = [...destColumn.players];
-            const [removed] = sourcePlayers.splice(source.index, 1);
-            destPlayers.splice(destination.index, 0, removed);
-            setHomeColumns({
-                ...homeColumn,
-                [source.droppableId]: {
-                  ...sourceColumn,
-                  players: sourcePlayers
-                },
-                [destination.droppableId]: {
-                  ...destColumn,
-                  players: destPlayers
-                }
-            });
-        }
+            if (source.droppableId !== destination.droppableId) {
+                const sourceColumn = homeColumn[source.droppableId];
+                const destColumn = homeColumn[destination.droppableId];
+                if(destination.droppableId === "Court" && destColumn.length >= 5) return;
+                const draggedPlayer = sourceColumn.find(player => player.id === draggableId);
+                const filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
+                setHomeColumns({
+                    ...homeColumn,
+                    [source.droppableId]: filteredPlayers,
+                    [destination.droppableId]: [...homeColumn[destination.droppableId], draggedPlayer]
+                });
+            };
         } else {
             if (source.droppableId !== destination.droppableId) {
                 const sourceColumn = awayColumn[source.droppableId];
                 const destColumn = awayColumn[destination.droppableId];
-                if(destination.droppableId === "Court" && destColumn.players.length >= 5) return;
-                const sourcePlayers = [...sourceColumn.players];
-                const destPlayers = [...destColumn.players];
-                const [removed] = sourcePlayers.splice(source.index, 1);
-                destPlayers.splice(destination.index, 0, removed);
+                if(destination.droppableId === "Court" && destColumn.length >= 5) return;
+                const draggedPlayer = sourceColumn.find(player => player.id === draggableId);
+                const filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
                 setAwayColumns({
                     ...awayColumn,
-                    [source.droppableId]: {
-                      ...sourceColumn,
-                      players: sourcePlayers
-                    },
-                    [destination.droppableId]: {
-                      ...destColumn,
-                      players: destPlayers
-                    }
+                    [source.droppableId]: filteredPlayers,
+                    [destination.droppableId]: [...awayColumn[destination.droppableId], draggedPlayer]
                 });
-            } else {
-                const column = awayColumn[source.droppableId];
-                const copiedPlayers = [...column.players];
-                const [removed] = copiedPlayers.splice(source.index, 1);
-                copiedPlayers.splice(destination.index, 0, removed)
-                setAwayColumns({
-                    ...awayColumn,
-                    [source.droppableId]: {
-                      ...column,
-                      players: copiedPlayers
-                    }
-                });
-            }
+            };
         }
     };
 
@@ -130,7 +79,7 @@ function StatSheet(){
                             <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
                         </div>
                     </div>
-                    <TeamStatsTable team="home" updateSubStats={updateSubStats} players={homeColumn["Court"].players}/>
+                    <TeamStatsTable team="home" updateStats={updateStats} players={homeColumn["Court"]}/>
                 </Paper>
             </div>
             <div className="scoreBoard">
@@ -144,7 +93,7 @@ function StatSheet(){
                             <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
                         </div>
                     </div>
-                    <TeamStatsTable team="away" updateSubStats={updateSubStats} players={awayColumn["Court"].players}/>
+                    <TeamStatsTable team="away" updateStats={updateStats} players={awayColumn["Court"]}/>
                 </Paper>
             </div>
         </div>

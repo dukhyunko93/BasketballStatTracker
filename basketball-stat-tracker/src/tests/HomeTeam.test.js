@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HomeTeam from "../Container/HomeTeam";
+import HomeTeam from "../component/HomeTeamForm";
 import App from "../App";
 
 import { configure, shallow } from 'enzyme';

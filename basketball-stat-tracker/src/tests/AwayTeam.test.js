@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import AwayTeam from "../Container/AwayTeam";
+import AwayTeam from "../component/AwayTeamForm";
 
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
