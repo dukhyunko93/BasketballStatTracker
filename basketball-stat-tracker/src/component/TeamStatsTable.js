@@ -20,7 +20,7 @@ export default function TeamStatsTable(props) {
 
     // Render each players as a row on the table
     const createPlayers = () => {
-        return props.players.map((player) => <PlayerRow team={props.team} updateStats={props.updateStats} key={player.id} player={player} />)
+        return props.players.map((player) => <PlayerRow team={props.team} updateSubStats={props.updateSubStats} key={player.id} player={player} />)
     };
     
     // Render home and away team table headers

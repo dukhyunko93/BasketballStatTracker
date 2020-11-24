@@ -2,28 +2,23 @@ import React, { useState } from "react";
 import "./StatSheet.css";
 import Bench from "../component/Bench";
 import TeamStatsTable from "../component/TeamStatsTable"
-import { uuid } from "uuidv4"
 import { Paper } from "@material-ui/core";
 import matchExample from "../component/TeamExample";
 
 const homeInfo = {
     "Court":{
-        area: "Court",
         players: [],
     },
     "Bench":{
-        area: "Bench",
         players: matchExample.homeTeamPlayers,
     }
 }
 
 const awayInfo = {
     "Court":{
-        area: "Court",
         players: [],
     },
     "Bench":{
-        area: "Bench",
         players: matchExample.awayTeamPlayers,
     }
 }
@@ -32,14 +27,35 @@ const awayInfo = {
 function StatSheet(){
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
-    let homeCourtInfo = homeColumn[Object.keys(homeColumn)[0]].players;
-    let awayCourtInfo = awayColumn[Object.keys(awayColumn)[0]].players;
 
-    console.log(homeColumn)
-    const updateStats = (player, team, statCategory) => {
-        console.log(player, team, statCategory)
+    const updateSubStats = (updatePlayer, team, statCategory, statValue) => {
         if (team === "home"){
-            console.log(homeColumn)
+            let foundPlayer = homeColumn["Court"].players.find(player => player.id === updatePlayer.id);
+            foundPlayer.stats[statCategory] = statValue
+            let filteredPlayers = homeColumn["Court"].players.filter(player => player.id !== updatePlayer.id)
+            setHomeColumns({
+                ...homeColumn,
+                ["Court"]:{
+                    players: [
+                        ...filteredPlayers,
+                        foundPlayer
+                    ]
+                }
+            })
+        } else {
+            let foundPlayer = awayColumn["Court"].players.find(player => player.id === updatePlayer.id);
+            console.log(foundPlayer)
+            foundPlayer.stats[statCategory] = statValue
+            let filteredPlayers = awayColumn["Court"].players.filter(player => player.id !== updatePlayer.id)
+            setAwayColumns({
+                ...awayColumn,
+                ["Court"]:{
+                    players: [
+                        ...filteredPlayers,
+                        foundPlayer
+                    ]
+                }
+            })
         }
     }
 
@@ -51,7 +67,7 @@ function StatSheet(){
         if (source.droppableId !== destination.droppableId) {
             const sourceColumn = homeColumn[source.droppableId];
             const destColumn = homeColumn[destination.droppableId];
-            if(destColumn.area === "Court" && destColumn.players.length >= 5) return;
+            if(destination.droppableId === "Court" && destColumn.players.length >= 5) return;
             const sourcePlayers = [...sourceColumn.players];
             const destPlayers = [...destColumn.players];
             const [removed] = sourcePlayers.splice(source.index, 1);
@@ -72,7 +88,7 @@ function StatSheet(){
             if (source.droppableId !== destination.droppableId) {
                 const sourceColumn = awayColumn[source.droppableId];
                 const destColumn = awayColumn[destination.droppableId];
-                if(destColumn.area === "Court" && destColumn.players.length >= 5) return;
+                if(destination.droppableId === "Court" && destColumn.players.length >= 5) return;
                 const sourcePlayers = [...sourceColumn.players];
                 const destPlayers = [...destColumn.players];
                 const [removed] = sourcePlayers.splice(source.index, 1);
@@ -114,7 +130,7 @@ function StatSheet(){
                             <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
                         </div>
                     </div>
-                    <TeamStatsTable team="home" updateStats={updateStats} players={homeCourtInfo}/>
+                    <TeamStatsTable team="home" updateSubStats={updateSubStats} players={homeColumn["Court"].players}/>
                 </Paper>
             </div>
             <div className="scoreBoard">
@@ -128,7 +144,7 @@ function StatSheet(){
                             <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
                         </div>
                     </div>
-                    <TeamStatsTable team="away" updateStats={updateStats} players={awayCourtInfo}/>
+                    <TeamStatsTable team="away" updateSubStats={updateSubStats} players={awayColumn["Court"].players}/>
                 </Paper>
             </div>
         </div>

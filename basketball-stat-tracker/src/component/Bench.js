@@ -44,6 +44,7 @@ function Bench(props){
             );
         })
     }
+    
     return(
         <DragDropContext onDragEnd={result => props.onDragEnd(result, props.team)}>
             {Object.entries(props.columns).map(([columnId, column], index) => {

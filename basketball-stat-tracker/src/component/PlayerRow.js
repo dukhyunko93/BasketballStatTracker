@@ -29,11 +29,16 @@ export default function PlayerRow(props) {
 
     const statCategory = { 0: "REB", 1: "AST", 2: "STL", 3: "BLK", 4: "TO", 5: "PF" }
     const addStat = (index) => {
-        let stat = statCategory[index]
-        props.updateStats(props.player, props.team, stat)
+        let stat = statCategory[index];
+        let statValue = props.player.stats[stat] + 1;
+        props.updateStats(props.player, props.team, stat, statValue);
     }
+
     const subtractStat = (index) => {
-        console.log(statCategory[index], props)
+        let stat = statCategory[index];
+        let statValue = props.player.stats[stat] - 1;
+        if(statValue < 0) statValue = 0;
+        props.updateStats(props.player, props.team, stat, statValue);
     }
 
     const renderScoreController = () => {
