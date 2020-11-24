@@ -20,7 +20,7 @@ function Bench(props){
 
     const sortPlayers = (column) => {
         let sortedPlayers = sortInsertion(column.players)
-        return sortedPlayers.map((player,index) => {
+        return sortedPlayers.map((player, index) => {
             return (
                 <Draggable key={player.id} draggableId={player.id} index={index}>
                     {(provided, snapshot) => {
@@ -44,7 +44,6 @@ function Bench(props){
             );
         })
     }
-
     return(
         <DragDropContext onDragEnd={result => props.onDragEnd(result, props.team)}>
             {Object.entries(props.columns).map(([columnId, column], index) => {

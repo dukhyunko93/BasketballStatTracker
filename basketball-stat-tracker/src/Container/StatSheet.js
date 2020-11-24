@@ -7,22 +7,22 @@ import { Paper } from "@material-ui/core";
 import matchExample from "../component/TeamExample";
 
 const homeInfo = {
-    [uuid()]:{
+    "Court":{
         area: "Court",
         players: [],
     },
-    [uuid()]:{
+    "Bench":{
         area: "Bench",
         players: matchExample.homeTeamPlayers,
     }
 }
 
 const awayInfo = {
-    [uuid()]:{
+    "Court":{
         area: "Court",
         players: [],
     },
-    [uuid()]:{
+    "Bench":{
         area: "Bench",
         players: matchExample.awayTeamPlayers,
     }
@@ -35,6 +35,7 @@ function StatSheet(){
     let homeCourtInfo = homeColumn[Object.keys(homeColumn)[0]].players;
     let awayCourtInfo = awayColumn[Object.keys(awayColumn)[0]].players;
 
+    console.log(homeColumn)
     const updateStats = (player, team, statCategory) => {
         console.log(player, team, statCategory)
         if (team === "home"){
