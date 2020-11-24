@@ -43,27 +43,50 @@ export default function PlayerRow(props) {
     }
 
     const addScore = (type) => {
-        if(type[2] === "M"){
+        if(type === "TPM"){
+            player.stats["TPM"]++;
+            player.stats["TPA"]++;
+            player.stats["FGM"]++;
+            player.stats["FGA"]++;
+        }else if(type === "TPA"){
+            player.stats["TPA"]++;
+            player.stats["FGA"]++;
+        }else if(type[2] === "M"){
             let attempt = type.substring(0,2) + "A"
             player.stats[type]++;
             player.stats[attempt]++;
-        } else {
+        }else{
             player.stats[type]++;
         }
-        console.log(player.stats["PTS"])
+        let totalScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 3)
+        player.stats["PTS"] = totalScore
         props.updateStats(player, team)
     }
 
     const subtractScore = type => {
-        if(type[2] === "M"){
+        if(type === "TPM"){
+            if(player.stats["TPM"] > 0){
+                player.stats["TPM"]--;
+                player.stats["TPA"]--;
+                player.stats["FGM"]--;
+                player.stats["FGA"]--;
+            }
+        }else if(type === "TPA"){
+            if(player.stats["TPA"] > 0){
+                player.stats["TPA"]--;
+                player.stats["FGA"]--;
+            }
+        }else if(type[2] === "M"){
             let attempt = type.substring(0,2) + "A"
             player.stats[type]--;
             player.stats[attempt]--;
             if(player.stats[attempt] < 0) player.stats[attempt] = 0;
-        } else {
+        }else{
             player.stats[type]--;
         }
         if(player.stats[type] < 0) player.stats[type] = 0;
+        let totalScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 3)
+        player.stats["PTS"] = totalScore
         props.updateStats(player, team)
     }
 
