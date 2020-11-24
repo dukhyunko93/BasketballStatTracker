@@ -26,8 +26,14 @@ const useStyles = makeStyles({
 export default function PlayerRow(props) {
     const classes = useStyles();
 
-    const onClickHandler = (e) => {
-        e.target.innerText++
+
+    const statCategory = { 0: "REB", 1: "AST", 2: "STL", 3: "BLK", 4: "TO", 5: "PF" }
+    const addStat = (index) => {
+        let stat = statCategory[index]
+        props.updateStats(props.player, props.team, stat)
+    }
+    const subtractStat = (index) => {
+        console.log(statCategory[index], props)
     }
 
     const renderScoreController = () => {
@@ -46,9 +52,9 @@ export default function PlayerRow(props) {
         let uniqueKey = 0;
         return stats.map((stat, index) => 
             <TableCell key={index} className="point-control">
-                <Button className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
+                <Button onClick={e => subtractStat(index)} className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
                     {stat}
-                <Button className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
+                <Button onClick={e => addStat(index)} className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
             </TableCell>
         );
     };

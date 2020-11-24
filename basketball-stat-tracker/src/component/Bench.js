@@ -15,7 +15,7 @@ function sortInsertion(arr){
 
 function Bench(props){
     const renderPopOver = () => {
-        console.log("Hello")
+        console.log("Hello", props.team)
     }
 
     const sortPlayers = (column) => {
@@ -46,7 +46,7 @@ function Bench(props){
     }
 
     return(
-        <DragDropContext onDragEnd={result => props.onDragEnd(result)}>
+        <DragDropContext onDragEnd={result => props.onDragEnd(result, props.team)}>
             {Object.entries(props.columns).map(([columnId, column], index) => {
                 return (
                         <div key={columnId}>
@@ -57,7 +57,7 @@ function Bench(props){
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                             style={
-                                                props.home ? 
+                                                props.team === "home" ? 
                                                 {background: snapshot.isDraggingOver ? "lightblue" : "#779ecb"}:
                                                 {background: snapshot.isDraggingOver ? "lightpink" : "#ff6961"}
                                             }
