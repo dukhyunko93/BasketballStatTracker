@@ -1,6 +1,7 @@
 import React from "react";
 import '../container/StatSheet.css';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import PlayerCircle from './PlayerCircle'
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function sortInsertion(arr){
     for ( let i = 1; i < arr.length; i++ ){
@@ -13,36 +14,11 @@ function sortInsertion(arr){
     return arr;
 }
 
-function Bench(props){
-    const renderPopOver = () => {
-        console.log("Hello", props.team)
-    }
-
+export default function Bench(props){
+    
     const sortPlayers = (column) => {
         let sortedPlayers = sortInsertion(column)
-        return sortedPlayers.map((player, index) => {
-            return (
-                <Draggable key={player.id} draggableId={player.id} index={index}>
-                    {(provided, snapshot) => {
-                        return (
-                            <div
-                                className="player"
-                                onClick={renderPopOver}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={{
-                                    backgroundColor: snapshot.isDragging ? "#263B4A" : "white",
-                                    ...provided.draggableProps.style
-                                }}
-                            >
-                                {player.jerseyNumber}
-                            </div>    
-                        );
-                    }}
-                </Draggable>
-            );
-        })
+        return sortedPlayers.map((player, index) => <PlayerCircle player={player} index={index} />)
     }
 
     return(
@@ -76,5 +52,3 @@ function Bench(props){
         </DragDropContext>
     )
 }
-
-export default Bench;

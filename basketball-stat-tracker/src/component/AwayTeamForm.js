@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Player from './Player'
+import NewPlayer from './NewPlayer'
 import { FormControl, InputLabel, Input, FormHelperText, Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 
@@ -32,7 +32,7 @@ function AwayTeam (props){
 
     const renderPlayers = () => {
         return props.awayTeamPlayers.map(player => 
-            <Player 
+            <NewPlayer 
                 team="away"
                 key={player.id}
                 id={player.id}

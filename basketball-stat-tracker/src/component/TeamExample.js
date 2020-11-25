@@ -2,6 +2,7 @@ import { uuid } from "uuidv4";
 
 const matchExample = {
     homeTeam: "New York Knicks",
+    homeTeamScore: 0,
     homeTeamPlayers: [
         {         
         id: uuid(),
@@ -181,6 +182,7 @@ const matchExample = {
         },
     ],
     awayTeam: "Los Angeles Lakers",
+    awayTeamScore: 0,
     awayTeamPlayers: [
         {            
         id: uuid(),

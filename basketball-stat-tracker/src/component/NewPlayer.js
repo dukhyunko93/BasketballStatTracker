@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: "120px",
     }
 }));
-function Player (props){
+export default function NewPlayer (props){
     const classes = useStyles();
     
     const onChange = (e) => {
@@ -57,5 +57,3 @@ function Player (props){
         </>
     )
 }
-
-export default Player;

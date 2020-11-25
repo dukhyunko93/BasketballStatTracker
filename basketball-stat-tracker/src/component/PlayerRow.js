@@ -11,7 +11,8 @@ const useStyles = makeStyles({
         padding: "0",
         borderRadius: "50%",
         marginRight: "auto",
-        marginLeft: "auto"
+        marginLeft: "auto",
+        color: "#c2c2d6"
     },
     buttonStats:{
         minWidth: "25px",
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
         borderRadius: "50%",
         marginRight: "5px",
         marginLeft: "5px",
+        color: "#c2c2d6"
     }
 });
 
