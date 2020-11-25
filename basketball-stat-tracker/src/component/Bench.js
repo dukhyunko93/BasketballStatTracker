@@ -25,9 +25,9 @@ function Bench(props){
                 <Draggable key={player.id} draggableId={player.id} index={index}>
                     {(provided, snapshot) => {
                         return (
-                            <li
-                                onClick={renderPopOver}
+                            <div
                                 className="player"
+                                onClick={renderPopOver}
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
@@ -37,7 +37,7 @@ function Bench(props){
                                 }}
                             >
                                 {player.jerseyNumber}
-                            </li>    
+                            </div>    
                         );
                     }}
                 </Draggable>
@@ -49,11 +49,13 @@ function Bench(props){
         <DragDropContext onDragEnd={result => props.onDragEnd(result, props.team)}>
             {Object.entries(props.columns).map(([columnId, column], index) => {
                 return (
-                        <div key={columnId}>
+                        <div className="area-container" key={columnId}>   
+                            <h5 className="area">{columnId}</h5>
                             <Droppable key={columnId} droppableId={columnId}>
                                 {(provided, snapshot) => {
                                     return(
-                                        <ul 
+                                        <div 
+                                            className={columnId}
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                             style={
@@ -61,11 +63,10 @@ function Bench(props){
                                                 {background: snapshot.isDraggingOver ? "lightblue" : "#779ecb"}:
                                                 {background: snapshot.isDraggingOver ? "lightpink" : "#ff6961"}
                                             }
-                                        >   
-                                            <h5 >{column.area}</h5>
+                                        >
                                             {provided.placeholder}
                                             {sortPlayers(column)}
-                                        </ul>
+                                        </div>
                                     );
                                 }}
                             </Droppable>

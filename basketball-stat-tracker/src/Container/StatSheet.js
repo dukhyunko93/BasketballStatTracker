@@ -71,28 +71,29 @@ function StatSheet(){
 
     return(
         <div className="container" >
-            <div className="homeTeamContainer" >
-                <Paper style={{minWidth: "900px",padding: "1px"}}>
-                    <div className="homeTeamBench">
-                        <h5>Home: {matchExample.homeTeam}</h5>
-                        <div className="homePlayers">
+            <div className="stat-container">
+                <div className="team-container">
+                    <h5 className="team-name">{matchExample.homeTeam}</h5>
+                    <div className="team-bench">
+                        <div className="players-container">
                             <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
                         </div>
                     </div>
+                </div>
+                <Paper style={{minWidth: "900px",padding: "1px"}}>
                     <TeamStatsTable team="home" updateStats={updateStats} players={homeColumn["Court"]}/>
                 </Paper>
             </div>
-            <div className="scoreBoard">
-                <h1>Home: 100 Away: 99</h1>
-            </div>
-            <div className="awayTeamContainer">
-                <Paper style={{minWidth: "900px",padding: "1px"}}>
-                    <div className="awayTeamBench">
-                        <h5>Away: {matchExample.awayTeam}</h5>
-                        <div className="awayPlayers">
+            <div className="stat-container">
+                <div className="team-container">
+                    <h5 className="team-name">{matchExample.awayTeam}</h5>
+                    <div className="team-bench">
+                        <div className="players-container">
                             <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
                         </div>
                     </div>
+                </div>    
+                <Paper style={{minWidth: "900px",padding: "1px"}}>
                     <TeamStatsTable team="away" updateStats={updateStats} players={awayColumn["Court"]}/>
                 </Paper>
             </div>

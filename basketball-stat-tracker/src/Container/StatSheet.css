@@ -2,131 +2,69 @@ body{
     background-color: #F5F5F5;
 }
 
-h5{
-    margin-top: auto;
+.stat-container{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+    width: 100%;
+    height: fit-content;
+}
+
+h5.team-name{
+    text-align: center;
+    margin: auto;
+    width: 120px;
+}
+
+.team-bench{
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 8px 6px -2px black;
+}
+
+.players-container{
+    display: flex;
+}
+
+.area-container{
+    padding: 5px
+}
+
+.Court{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+}
+
+.Bench{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+    border-bottom-right-radius: 20px;
+}
+
+h5.area{
+    margin-top: 5px;;
     margin-bottom: auto;
     margin-right: 5px;
     margin-left: 5px;
+    width: 40px;
 }
 
 .player{
     text-align: center;
-    max-height: 30px;
     width: 20px;
     color: black;
     user-select: none;
-    border-radius: 20px;
+    border-radius: 50%;
     font-weight: 500;
-}
-
-h5{
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-ul{
-    margin: 0;
-    padding: 0;
-    height: 40px;
-}
-
-li {
     padding: 5px;
-    margin: 5px; 
-    list-style: none;
-}
-
-.homeTeamBench{
-    width: fit-content;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 5px;
-    display: flex;
-    background-color: #779ecb;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0 8px 6px -2px black;
-}
-.awayTeamBench{
-    width: fit-content;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 5px;
-    display: flex;
-    background-color: #ff6961;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0 8px 6px -2px black;
-}
-
-/* HOME TEAM STYLES */
-.homeTeamContainer{
     margin-left: auto;
     margin-right: auto;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: fit-content;
-    height: fit-content;
-}
-
-div.homePlayers{
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-div.homePlayers ul{
-    padding: 5px;
-    display: flex;
-}
-
-div.homePlayers div:nth-child(1) ul {
-    width: 250px;
-    border-right: 1px solid black;
-    border-top-left-radius: 20px;
-}
-
-div.homePlayers div:nth-child(2) ul {
-    width: fit-content;
-    border-bottom-right-radius: 20px;
-}
-
-/* AWAY TEAM STYLES */
-.awayTeamContainer{
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: fit-content;
-    height: fit-content;
-}
-div.awayPlayers{
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-div.awayPlayers ul{
-    padding: 5px;
-    display: flex;
-}
-
-div.awayPlayers div:nth-child(1) ul {
-    width: 250px;
-    border-right: 1px solid black;
-    border-top-left-radius: 20px;
-}
-
-div.awayPlayers div:nth-child(2) ul {
-    width: fit-content;
-    border-bottom-right-radius: 20px;
-}
-
-/* SCORE BOARD*/
-.scoreBoard{
-    text-align: center;
 }

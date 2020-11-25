@@ -5,14 +5,14 @@ import './PlayerRow.css'
 import { Table, TableBody, TableCell, TableHead, TableRow, Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  table: {
+    table: {
         margin: "10px",
         width: "fit-content",
-  },
-  container:{
-      width: "fit-content",
-      maxWidth: "none"
-  }
+    },
+    container:{
+        width: "fit-content",
+        maxWidth: "none"
+    }
 });
 
 export default function TeamStatsTable(props) {
