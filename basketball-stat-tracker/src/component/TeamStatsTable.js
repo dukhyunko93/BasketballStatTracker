@@ -24,7 +24,7 @@ export default function TeamStatsTable(props) {
     
     // Render home and away team table headers
     const createHeaders = () => {
-        let headers = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM", "NAME" , "#", "FG", "3PT", "FT", "REB", "AST", "STL", "BLK", "TO", "PF", "PTS"]
+        let headers = ["NAME" , "#", "FGA", "FGM", "TPA", "TPM", "FTA", "FTM", "FG", "3PT", "FT", "PTS", "REB", "AST", "STL", "BLK", "TO", "PF"]
         return headers.map(header => 
             <TableCell key={header} className="table-header-cell">{header}</TableCell>
         )

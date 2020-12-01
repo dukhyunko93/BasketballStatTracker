@@ -117,16 +117,14 @@ export default function PlayerRow(props) {
     return (
         <>
             <TableRow key={player.id}>
-                {renderScoreController()}
-                <TableCell className="point-control">
-                    {player.firstName[0]}.{player.lastName}
-                </TableCell>
+                <TableCell className="point-control">{player.firstName[0]}.{player.lastName}</TableCell>
                 <TableCell className="point-control">{player.jerseyNumber}</TableCell>
+                {renderScoreController()}
                 <TableCell className="point-control">{player.stats.FGM} / {player.stats.FGA}</TableCell>
                 <TableCell className="point-control">{player.stats.TPM} / {player.stats.TPA}</TableCell>
                 <TableCell className="point-control">{player.stats.FTM} / {player.stats.FTA}</TableCell>
+                <TableCell className="point-control">{player.stats.PTS}</TableCell>
                 {renderStatSheet()}
-                <TableCell align="center">{player.stats.PTS}</TableCell>
             </TableRow>
         </>
     );
