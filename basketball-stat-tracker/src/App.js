@@ -7,7 +7,6 @@ import NewMatchForm from './container/NewMatchForm'
 import StatSheet from './container/StatSheet'
 
 function App(props){
-    console.log(props.match)
     return (
         <>
             <Navbar /> 

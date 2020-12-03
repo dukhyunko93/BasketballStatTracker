@@ -3,18 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux';
-import createSagaMiddleware from 'redux-saga'
-import manageMatch from './reducer/ManageMatch'
-import rootSaga from './sagas'
-
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  manageMatch,
-  applyMiddleware(sagaMiddleware)
-)
-sagaMiddleware.run(rootSaga)
+import store from './store'
 
 const ConnectedApp = connect((state) => {
   return state;
