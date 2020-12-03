@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { showNavBar } from "../action/NavBar";
 
-function HomePage(){
+export default function HomePage(){
+    showNavBar()
     return(
         <div>
             Hello!
         </div>
     )
 }
-
-export default HomePage

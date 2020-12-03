@@ -18,7 +18,7 @@ export default function Bench(props){
     
     const sortPlayers = (column) => {
         let sortedPlayers = sortInsertion(column)
-        return sortedPlayers.map((player, index) => <PlayerCircle player={player} index={index} />)
+        return sortedPlayers.map((player, index) => <PlayerCircle key={player.id} player={player} index={index} />)
     }
 
     return(

@@ -6,6 +6,7 @@ export default function manageMatch(state = {
         awayTeamPlayers:[],
     }
 }, action) {
+    console.log(action)
     switch (action.type) {
         case 'SAVE_MATCH':
             return {

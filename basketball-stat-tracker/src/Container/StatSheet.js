@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
+import { hideNavBar } from "../action/NavBar";
 import "./StatSheet.css";
 import Bench from "../component/Bench";
 import TeamStatsTable from "../component/TeamStatsTable"
@@ -15,8 +16,8 @@ const awayInfo = {
     "Bench":matchExample.awayTeamPlayers,
 }
 
-
-function StatSheet(){
+export default function StatSheet(props){
+    hideNavBar()
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 
@@ -100,7 +101,3 @@ function StatSheet(){
         </div>
     )
 }
-
-export default StatSheet
-
-//2pt 3pt FT Reb Ast Stl Blk TO Foul Pts
