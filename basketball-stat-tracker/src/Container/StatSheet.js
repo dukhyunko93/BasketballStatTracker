@@ -1,5 +1,4 @@
 import React, { Component, useState } from "react";
-import { hideNavBar } from "../action/NavBar";
 import "./StatSheet.css";
 import Bench from "../component/Bench";
 import TeamStatsTable from "../component/TeamStatsTable"
@@ -17,7 +16,7 @@ const awayInfo = {
 }
 
 export default function StatSheet(props){
-    hideNavBar()
+    console.log("[[ stat sheet]]", props)
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 

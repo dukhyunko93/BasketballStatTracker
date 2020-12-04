@@ -1,22 +1,29 @@
-export default function manageMatch(state = {
-    match:{
-        homeTeamName: "",
-        awayTeamName: "",
-        homeTeamPlayers:[],
-        awayTeamPlayers:[],
-    }
-}, action) {
-    console.log(action)
+import{ SAVE_MATCH, GET_MATCH } from '../action'
+
+const INITIAL_STATE = {
+        homeTeamScore: "",
+        awayTeamScore: "",
+        homeTeamInfo: {},
+        awayTeamInfo:{},
+};
+
+const manageMatch = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'SAVE_MATCH':
+        case SAVE_MATCH: {      
+            console.log("save reducer hitting")    
             return {
                 homeTeamName: action.match.homeTeamName,
                 awayTeamName: action.match.awayTeamName,
                 homeTeamPlayers: action.match.homeTeamPlayers,
                 awayTeamPlayers: action.match.awayTeamPlayers,
             }
+        }
+        case GET_MATCH:
+            return state;
         
         default:
             return state;
     }
 }
+
+export default manageMatch

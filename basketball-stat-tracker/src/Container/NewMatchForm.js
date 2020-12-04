@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { saveMatch } from "../action/Match";
+import { saveMatch } from "../action";
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import './NewMatchForm.css';
 import AwayTeam from '../component/AwayTeamForm';
 import HomeTeam from '../component/HomeTeamForm';
@@ -7,7 +9,7 @@ import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 import { Redirect } from "react-router";
 
-function NewMatchForm(){
+function NewMatchForm(props){
     let htmlId = nextId();
 
     const updatePlayerInfo = (id, info, team) => {
@@ -66,7 +68,7 @@ function NewMatchForm(){
 
     const [redirect, setRedirect] = useState(false);
     const submitHandler = () => {
-        saveMatch({
+        props.saveMatch({
             homeTeamName: homeTeamName,
             homeTeamPlayers: homeTeamPlayers,
             awayTeamName: awayTeamName,
@@ -112,4 +114,12 @@ function NewMatchForm(){
     );
 }
 
-export default NewMatchForm
+const mapDispatchToProps = dispatch => {
+    const combinedActions = {
+        saveMatch
+    }
+    return bindActionCreators(combinedActions, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(NewMatchForm);
+// export default NewMatchForm;

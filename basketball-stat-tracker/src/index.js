@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider, connect } from 'react-redux';
-import store from './store'
+// import store from './store'
+import { createStore } from 'redux'
+import reducer from './reducer/index'
+
+let store = createStore(reducer)
 
 const ConnectedApp = connect((state) => {
   return state;
@@ -14,6 +18,7 @@ ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
             <ConnectedApp />
+            {/* <App /> */}
         </React.StrictMode>
     </Provider>,
   document.getElementById('root')

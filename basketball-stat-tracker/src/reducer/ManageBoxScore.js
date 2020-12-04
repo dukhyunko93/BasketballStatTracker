@@ -1,11 +1,13 @@
-export default function manageMatch(state = {
+const INITIAL_STATE = {
     match:{
         homeTeamScore: "",
         awayTeamScore: "",
         homeTeamInfo: {},
         awayTeamInfo:{},
     }
-}, action) {
+};
+
+export default function manageMatch(state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'SAVE_MATCH':
             return {

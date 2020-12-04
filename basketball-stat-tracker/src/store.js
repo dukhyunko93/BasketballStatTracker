@@ -1,15 +1,26 @@
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+// import { createStore, applyMiddleware } from 'redux'
+// import createSagaMiddleware from 'redux-saga'
 
-import manageMatch from './reducer/ManageMatch'
-import rootSaga from './sagas'
+// import reducer from './reducer/index'
+// import rootSaga from './sagas'
 
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
-// mount it on the Store
-export default createStore(manageMatch, applyMiddleware(sagaMiddleware));
+// // create the saga middleware
+// const sagaMiddleware = createSagaMiddleware();
+// // mount it on the Store
+// export default createStore(reducer, applyMiddleware(sagaMiddleware));
 
-// then run the saga
-sagaMiddleware.run(rootSaga);
+// // then run the saga
+// sagaMiddleware.run(rootSaga);
 
-// render the application
+// // render the application
+import { createStore } from 'redux'
+import reducer from './reducers/index'
+
+export function configureStore(){
+  return createStore(
+    reducer, 
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+}
+
+export const store = configureStore()
