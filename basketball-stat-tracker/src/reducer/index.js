@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import manageMatch from './ManageMatch'
+import matchReducer from './MatchReducer'
 
 export default combineReducers({
-    manageMatch
+    matchReducer
 });

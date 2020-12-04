@@ -1,8 +1,7 @@
 import React from 'react';
-import { showNavBar } from "../action/NavBar";
+// import { showNavBar } from "../action/NavBar";
 
-export default function HomePage(props){
-    console.log(props)
+export default function HomePage(){
     return(
         <div>
             Hello!

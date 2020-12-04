@@ -7,7 +7,7 @@ const INITIAL_STATE = {
         awayTeamInfo:{},
 };
 
-const manageMatch = (state = INITIAL_STATE, action) => {
+const matchReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SAVE_MATCH: {      
             console.log("save reducer hitting")    
@@ -26,4 +26,4 @@ const manageMatch = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default manageMatch
+export default matchReducer
