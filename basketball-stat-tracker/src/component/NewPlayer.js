@@ -38,7 +38,7 @@ export default function NewPlayer (props){
                 </FormControl>
                 <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
                     <InputLabel>Jersey #</InputLabel>
-                    <Input alue={props.jerseyNumber} onChange={onChange} />
+                    <Input value={props.jerseyNumber} onChange={onChange} />
                 </FormControl>
                 <FormControl className={clsx(classes.withoutLabel, classes.inputField)}>
                     <InputLabel>Position</InputLabel>

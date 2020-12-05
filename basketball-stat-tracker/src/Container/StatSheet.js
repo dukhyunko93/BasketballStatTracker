@@ -1,39 +1,31 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { hideNavBar } from "../action/navBarAction"
+import { saveBoxScore } from "../action/boxScoreAction"
+import { updatePlayerStat } from "../action/matchAction"
 import "./StatSheet.css";
-import Bench from "../component/Bench";
-import TeamStatsTable from "../component/TeamStatsTable"
 import { Paper } from "@material-ui/core";
-import matchExample from "../component/TeamExample";
+import Bench from "../component/Bench";
+import ScoreBox from "../component/ScoreBox"
+import TeamStatsTable from "../component/TeamStatsTable"
 
-const homeInfo = {
-    "Court":[],
-    "Bench": matchExample.homeTeamPlayers,
-}
-
-const awayInfo = {
-    "Court":[],
-    "Bench":matchExample.awayTeamPlayers,
-}
-
-export default function StatSheet(props){
-    console.log("[[ stat sheet]]", props)
+function StatSheet(props){
+    const homeInfo = {
+        "Court":[],
+        "Bench": props.match.homeTeamPlayers,
+    }
+    
+    const awayInfo = {
+        "Court":[],
+        "Bench": props.match.awayTeamPlayers,
+    }
+    
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 
     const updateStats = (updatedPlayer, team) => {
-        if (team === "home"){
-            let filteredPlayers = homeColumn["Court"].filter(player => player.id !== updatedPlayer.id)
-            setHomeColumns({
-                ...homeColumn,
-                "Court": [...filteredPlayers, updatedPlayer]
-            })
-        } else {
-            let filteredPlayers = awayColumn["Court"].filter(player => player.id !== updatedPlayer.id)
-            setAwayColumns({
-                ...awayColumn,
-                "Court":[...filteredPlayers, updatedPlayer]
-            })
-        }
+        props.updatePlayerStat(updatedPlayer, team)
     }
 
     // Drag players from bench to court or vice versa
@@ -69,15 +61,19 @@ export default function StatSheet(props){
         }
     };
 
+    const submitBoxScore = () => {
+        props.saveBoxScore(props.match)
+    }
+
+    props.hideNavBar();
     return(
         <div className="container" >
+            <ScoreBox submitBoxScore={submitBoxScore} />
             <div className="stat-container">
                 <div className="team-container">
-                    <h5 className="team-name">{matchExample.homeTeam}</h5>
+                    <h5 className="team-name">{props.match.homeTeamName}</h5>
                     <div className="team-bench">
-                        <div className="players-container">
-                            <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
-                        </div>
+                        <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
                     </div>
                 </div>
                 <Paper style={{minWidth: "900px",padding: "1px"}}>
@@ -86,11 +82,9 @@ export default function StatSheet(props){
             </div>
             <div className="stat-container">
                 <div className="team-container">
-                    <h5 className="team-name">{matchExample.awayTeam}</h5>
+                    <h5 className="team-name">{props.match.awayTeamName}</h5>
                     <div className="team-bench">
-                        <div className="players-container">
-                            <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
-                        </div>
+                        <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
                     </div>
                 </div>    
                 <Paper style={{minWidth: "900px",padding: "1px"}}>
@@ -100,3 +94,18 @@ export default function StatSheet(props){
         </div>
     )
 }
+
+const mapDispatchToProps = dispatch => {
+    const combinedActions = {
+        hideNavBar,
+        saveBoxScore,
+        updatePlayerStat
+    }
+    return bindActionCreators(combinedActions, dispatch);
+}
+
+const mapStateToProps = (state) => ({
+    match: state.matchReducer
+  })
+  
+export default connect(mapStateToProps, mapDispatchToProps)(StatSheet);

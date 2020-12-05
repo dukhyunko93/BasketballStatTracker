@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Redirect } from "react-router";
 import { saveMatch } from "../action/matchAction";
-import { hideNavBar } from "../action/navBarAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import './NewMatchForm.css';
-import AwayTeam from '../component/AwayTeamForm';
-import HomeTeam from '../component/HomeTeamForm';
+import AwayTeamForm from '../component/AwayTeamForm';
+import HomeTeamForm from '../component/HomeTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
-import { Redirect } from "react-router";
+import matchExample from "../component/TeamExample";
+
 let htmlId = nextId();
 
 const INITIAL_PLAYER_STATE = {
@@ -20,7 +21,6 @@ const INITIAL_PLAYER_STATE = {
 }
 
 function NewMatchForm(props){
-
     const updatePlayerInfo = (id, info, team) => {
         if (team === "home"){
             setHomeTeamPlayers(
@@ -53,10 +53,15 @@ function NewMatchForm(props){
         }
     }
 
-    const [homeTeamName, setHomeTeamName] = useState("");
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
-    const [awayTeamName, setAwayTeamName] = useState("");
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
+    const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
+    const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
+
+    // const [homeTeamName, setHomeTeamName] = useState("");
+    // const [homeTeamPlayers, setHomeTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
+    // const [awayTeamName, setAwayTeamName] = useState("");
+    // const [awayTeamPlayers, setAwayTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
 
 
     const [redirect, setRedirect] = useState(false);
@@ -67,7 +72,6 @@ function NewMatchForm(props){
             awayTeamName: awayTeamName,
             awayTeamPlayers: awayTeamPlayers,
         })
-        props.hideNavBar()
         setRedirect(true)
     }
 
@@ -80,7 +84,7 @@ function NewMatchForm(props){
             <div>
                 <div className="team-form-container">
                     <div className="team-form">
-                        <HomeTeam 
+                        <HomeTeamForm 
                           homeTeamName={homeTeamName} 
                           homeTeamPlayers={homeTeamPlayers} 
                           setHomeTeamName={setHomeTeamName} 
@@ -90,7 +94,7 @@ function NewMatchForm(props){
                         />
                     </div>
                     <div className="team-form">
-                        <AwayTeam 
+                        <AwayTeamForm 
                           awayTeamName={awayTeamName} 
                           awayTeamPlayers={awayTeamPlayers} 
                           setAwayTeamName={setAwayTeamName} 
@@ -111,7 +115,6 @@ function NewMatchForm(props){
 const mapDispatchToProps = dispatch => {
     const combinedActions = {
         saveMatch,
-        hideNavBar,
     }
     return bindActionCreators(combinedActions, dispatch);
 }

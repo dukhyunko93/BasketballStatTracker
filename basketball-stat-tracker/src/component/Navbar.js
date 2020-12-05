@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Link, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu'
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar(props) {
+function NavBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -71,3 +72,9 @@ export default function NavBar(props) {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+    visibility: state.navBarReducer.visibility
+})
+  
+export default connect(mapStateToProps, null)(NavBar);

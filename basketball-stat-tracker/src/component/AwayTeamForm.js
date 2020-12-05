@@ -7,7 +7,7 @@ import nextId from "react-id-generator";
 
 const useStyles = makeStyles((theme) => ({
     margin: {
-      margin: theme.spacing(1),
+      margin: '8px',
     },
     textField: {
       width: '25ch',

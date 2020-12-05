@@ -11,11 +11,11 @@ function App(props){
     const { matchReducer, navBarReducer } = props
     return (
         <>
-            <Navbar visibility={navBarReducer.visibility} /> 
+            <Navbar /> 
             <Router>
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
-                <Route exact path="/statsheet" render={() => <StatSheet match={matchReducer} />} />
+                <Route exact path="/statsheet" render={() => <StatSheet />} />
                 {/* <Footer /> */}
             </Router>
         </>

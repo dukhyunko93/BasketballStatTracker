@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 const navBarReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case HIDE_NAVBAR: {  
-            console.log("[[ navbar reducer ]]", action)
             return { visibility: false };
         }
         case SHOW_NAVBAR:

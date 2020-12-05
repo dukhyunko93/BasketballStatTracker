@@ -2,13 +2,12 @@ import { uuid } from "uuidv4";
 
 const matchExample = {
     homeTeam: "New York Knicks",
-    homeTeamScore: 0,
     homeTeamPlayers: [
         {         
         id: uuid(),
         firstName: "Kevin",
         lastName: "Knox",
-        jerseyNumber: "20",
+        jerseyNumber: 20,
         position: "SF",
         stats:{
             FGA: 0,
@@ -30,7 +29,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Portis",
         lastName: "Bobby",
-        jerseyNumber: "1",
+        jerseyNumber: 1,
         position: "PF",
         stats:{
             FGA: 0,
@@ -52,7 +51,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Randle",
         lastName: "Julius",
-        jerseyNumber: "30",
+        jerseyNumber: 30,
         position: "PF",
         stats:{
             FGA: 0,
@@ -74,7 +73,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Mitchell",
         lastName: "Robinson",
-        jerseyNumber: "23",
+        jerseyNumber: 23,
         position: "C",
         stats:{
             FGA: 0,
@@ -96,7 +95,7 @@ const matchExample = {
         id: uuid(),
         firstName: "RJ",
         lastName: "Barret",
-        jerseyNumber: "9",
+        jerseyNumber: 9,
         position: "SG",
         stats:{
             FGA: 0,
@@ -118,7 +117,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Frank",
         lastName: "Ntillikina",
-        jerseyNumber: "11",
+        jerseyNumber: 11,
         position: "PG",
         stats:{
             FGA: 0,
@@ -140,7 +139,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Taj",
         lastName: "Gibson",
-        jerseyNumber: "67",
+        jerseyNumber: 67,
         position: "C",
         stats:{
             FGA: 0,
@@ -162,7 +161,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Damyean",
         lastName: "Dotson",
-        jerseyNumber: "21",
+        jerseyNumber: 21,
         position: "SG",
         stats:{
             FGA: 0,
@@ -182,13 +181,12 @@ const matchExample = {
         },
     ],
     awayTeam: "Los Angeles Lakers",
-    awayTeamScore: 0,
     awayTeamPlayers: [
         {            
         id: uuid(),
         firstName: "Lebron",
         lastName: "James",
-        jerseyNumber: "23",
+        jerseyNumber: 23,
         position: "SF",
         stats:{
             FGA: 0,
@@ -210,7 +208,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Anthony",
         lastName: "Davis",
-        jerseyNumber: "3",
+        jerseyNumber: 3,
         position: "PF",
         stats:{
             FGA: 0,
@@ -232,7 +230,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Kyle",
         lastName: "Kuzma",
-        jerseyNumber: "0",
+        jerseyNumber: 0,
         position: "PF",
         stats:{
             FGA: 0,
@@ -254,7 +252,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Markief",
         lastName: "Morris",
-        jerseyNumber: "88",
+        jerseyNumber: 88,
         position: "PF",
         stats:{
             FGA: 0,
@@ -276,7 +274,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Rajon",
         lastName: "Rondo",
-        jerseyNumber: "9",
+        jerseyNumber: 9,
         position: "PG",
         stats:{
             FGA: 0,
@@ -298,7 +296,7 @@ const matchExample = {
         id: uuid(),
         firstName: "JR",
         lastName: "Smith",
-        jerseyNumber: "21",
+        jerseyNumber: 21,
         position: "SG",
         stats:{
             FGA: 0,
@@ -320,7 +318,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Dwight",
         lastName: "Howard",
-        jerseyNumber: "39",
+        jerseyNumber: 39,
         position: "C",
         stats:{
             FGA: 0,
@@ -342,7 +340,7 @@ const matchExample = {
         id: uuid(),
         firstName: "Danny",
         lastName: "Green",
-        jerseyNumber: "14",
+        jerseyNumber: 14,
         position: "SG",
         stats:{
             FGA: 0,
