@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { saveMatch } from "../action";
+import { saveMatch } from "../action/matchAction";
+import { hideNavBar } from "../action/navBarAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import './NewMatchForm.css';
@@ -8,9 +9,17 @@ import HomeTeam from '../component/HomeTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 import { Redirect } from "react-router";
+let htmlId = nextId();
+
+const INITIAL_PLAYER_STATE = {
+    id: htmlId,
+    firstName: "",
+    lastName: "",
+    jerseyNumber: "",
+    position: "",
+}
 
 function NewMatchForm(props){
-    let htmlId = nextId();
 
     const updatePlayerInfo = (id, info, team) => {
         if (team === "home"){
@@ -45,25 +54,9 @@ function NewMatchForm(props){
     }
 
     const [homeTeamName, setHomeTeamName] = useState("");
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState([
-        {
-            id: htmlId,
-            firstName: "",
-            lastName: "",
-            jerseyNumber: "",
-            position: "",
-        },
-    ]);
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
     const [awayTeamName, setAwayTeamName] = useState("");
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState([
-        {
-            id: htmlId,
-            firstName: "",
-            lastName: "",
-            jerseyNumber: "",
-            position: "",
-        },
-    ]);
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
 
 
     const [redirect, setRedirect] = useState(false);
@@ -74,6 +67,7 @@ function NewMatchForm(props){
             awayTeamName: awayTeamName,
             awayTeamPlayers: awayTeamPlayers,
         })
+        props.hideNavBar()
         setRedirect(true)
     }
 
@@ -116,10 +110,10 @@ function NewMatchForm(props){
 
 const mapDispatchToProps = dispatch => {
     const combinedActions = {
-        saveMatch
+        saveMatch,
+        hideNavBar,
     }
     return bindActionCreators(combinedActions, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(NewMatchForm);
-// export default NewMatchForm;

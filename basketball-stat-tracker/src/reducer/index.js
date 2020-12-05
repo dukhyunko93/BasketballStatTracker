@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import matchReducer from './MatchReducer'
+import matchReducer from './matchReducer'
+import navBarReducer from './navBarReducer'
 
 export default combineReducers({
-    matchReducer
+    matchReducer,
+    navBarReducer
 });

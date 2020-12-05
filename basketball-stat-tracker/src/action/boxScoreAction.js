@@ -1,0 +1,1 @@
+export const saveBoxscore = match => ({ type: SAVE_BOXSCORE, match });
