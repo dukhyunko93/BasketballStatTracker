@@ -38,6 +38,7 @@ h5.team-name{
     grid-template-rows: repeat(5, auto);
     grid-gap: 5px;
     align-content: center;
+    justify-content: center;
     height: 250px;
 }
 
@@ -49,6 +50,7 @@ h5.team-name{
     grid-gap: 5px;
     align-content: center;
     height: 250px;
+    justify-content: center;
     border-bottom-right-radius: 20px;
 }
 

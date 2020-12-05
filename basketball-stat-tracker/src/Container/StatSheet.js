@@ -24,8 +24,12 @@ function StatSheet(props){
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 
-    const updateStats = (updatedPlayer, team) => {
-        props.updatePlayerStat(updatedPlayer, team)
+    const updateStats = (updatedPlayer, team, scoreDifference) => {
+        props.updatePlayerStat(updatedPlayer, team, scoreDifference)
+    }
+
+    const submitBoxScore = () => {
+        props.saveBoxScore(props.match)
     }
 
     // Drag players from bench to court or vice versa
@@ -61,14 +65,10 @@ function StatSheet(props){
         }
     };
 
-    const submitBoxScore = () => {
-        props.saveBoxScore(props.match)
-    }
-
     props.hideNavBar();
     return(
         <div className="container" >
-            <ScoreBox submitBoxScore={submitBoxScore} />
+            <ScoreBox submitBoxScore={submitBoxScore} homeTeamScore={props.match.homeTeamScore} awayTeamScore={props.match.awayTeamScore} />
             <div className="stat-container">
                 <div className="team-container">
                     <h5 className="team-name">{props.match.homeTeamName}</h5>

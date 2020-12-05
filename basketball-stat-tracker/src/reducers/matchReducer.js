@@ -25,17 +25,18 @@ const matchReducer = (state = INITIAL_STATE, action) => {
             return state;
         
         case UPDATE_PLAYER_STAT:{
-            console.log("[[ match reducer ]]", action.match)
             if (action.team === "home"){
                 let filteredPlayers = state.homeTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
                 return{
                     ...state,
+                    homeTeamScore: state.homeTeamScore + action.scoreDifference,
                     homeTeamPlayers: [...filteredPlayers, action.updatedPlayer]
                 }
             } else {
                 let filteredPlayers = state.awayTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
                 return{
                     ...state,
+                    awayTeamScore: state.awayTeamScore + action.scoreDifference,
                     awayTeamPlayers:[...filteredPlayers, action.updatedPlayer]
                 }
             }

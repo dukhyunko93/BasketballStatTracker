@@ -26,6 +26,21 @@ function HomeTeam (props){
                 lastName: "",
                 jerseyNumber: "",
                 position: "",
+                stats: {
+                    FGA: 0,
+                    FGM: 0,
+                    TPA: 0,
+                    TPM: 0,
+                    FTA: 0,
+                    FTM: 0,
+                    REB: 0,
+                    AST: 0,
+                    STL: 0,
+                    BLK: 0,
+                    TO: 0,
+                    PF: 0,
+                    PTS: 0,
+                }
             }
         ])
     }

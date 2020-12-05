@@ -60,9 +60,10 @@ export default function PlayerRow(props) {
         }else{
             player.stats[type]++;
         }
-        let totalScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 3)
-        player.stats["PTS"] = totalScore
-        props.updateStats(player, team)
+        let newScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 1)
+        let scoreDifference = newScore - player.stats["PTS"]
+        player.stats["PTS"] = newScore
+        props.updateStats(player, team, scoreDifference)
     }
 
     const subtractScore = type => {
@@ -87,9 +88,10 @@ export default function PlayerRow(props) {
             player.stats[type]--;
         }
         if(player.stats[type] < 0) player.stats[type] = 0;
-        let totalScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 3)
-        player.stats["PTS"] = totalScore
-        props.updateStats(player, team)
+        let newScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 1)
+        let scoreDifference = newScore - player.stats["PTS"]
+        player.stats["PTS"] = newScore
+        props.updateStats(player, team, scoreDifference)
     }
 
     const renderScoreController = () => {
