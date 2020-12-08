@@ -8,8 +8,7 @@ import NewMatchForm from './container/NewMatchForm'
 import StatSheet from './container/StatSheet'
 import FinalBoxScore from './container/FinalBoxScore'
 
-function App(props){
-    
+const App = () => {
     return (
         <>
             <Navbar /> 

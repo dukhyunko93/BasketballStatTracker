@@ -1,4 +1,4 @@
-import{ SAVE_MATCH, GET_MATCH, UPDATE_PLAYER_STAT } from '../action/actionType'
+import{ SAVE_MATCH, GET_MATCH, UPDATE_PLAYER_STAT, UPDATE_SCORE_BOARD } from '../action/actionType'
 
 const INITIAL_STATE = {
         homeTeamScore: 0,
@@ -29,15 +29,27 @@ const matchReducer = (state = INITIAL_STATE, action) => {
                 let filteredPlayers = state.homeTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
                 return{
                     ...state,
-                    homeTeamScore: state.homeTeamScore + action.scoreDifference,
                     homeTeamPlayers: [...filteredPlayers, action.updatedPlayer]
                 }
             } else {
                 let filteredPlayers = state.awayTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
                 return{
                     ...state,
-                    awayTeamScore: state.awayTeamScore + action.scoreDifference,
                     awayTeamPlayers:[...filteredPlayers, action.updatedPlayer]
+                }
+            }
+        }
+
+        case UPDATE_SCORE_BOARD:{
+            if (action.team === "home"){
+                return{
+                    ...state,
+                    homeTeamScore: state.homeTeamScore + action.scoreDifference
+                }
+            } else {
+                return{
+                    ...state,
+                    awayTeamScore: state.awayTeamScore + action.scoreDifference
                 }
             }
         }

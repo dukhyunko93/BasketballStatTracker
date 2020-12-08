@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../component/Navbar'
 import { Redirect } from "react-router";
 import { saveMatch } from "../action/matchAction";
 import { connect } from 'react-redux'

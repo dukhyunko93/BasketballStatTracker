@@ -1,44 +1,50 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Typography, Link } from "@material-ui/core"
-import LinkedInLogo from "./images/LinkedIn.png"
-import MediumLogo from "./images/Medium.png"
-import GithubLogo from "./images/Github.png"
+import { Typography, Link, Grid } from "@material-ui/core"
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import './Footer.css'
 
 const FooterContainer = styled.div`
-  position: relative
-  text-align: center;
+  position: relative;
   bottom: 0;
-  width: 100% !important;
-  height: 100px !important ;    
-  background-color: #3f51b5;
-  color: white;
-`;
-const LogoCointainer = styled.div`
+  padding-top: 2vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  text-align: center;
+  color: gray;
 `
-const Logo = styled.img`
+const CopyrightContainer = styled.div`
+  padding: 2vh;
+  border-top: 1px solid #d9d9d9;
 `
+
+const LinkGrid = styled(Grid)`
+  margin: 5px;
+`
+
 function Copyright() {
   return (
-      <>
-          <Typography variant="body2">
-              {"Created by Duke Ko "}
-          </Typography>
-          <LogoCointainer>
-              <Link color="inherit" href="https://dukhyunko93.github.io/">
-                <Logo src={LinkedInLogo}/>
-              </Link>
-            <Logo src={MediumLogo}/>
-            <Logo src={GithubLogo}/>
-          </LogoCointainer>
-          <Typography>
-              <Link color="inherit" href="https://dukhyunko93.github.io/">
-                <image className="medium"/>
-                <image className="github"/>
-              </Link>
-          </Typography>
-      </>
+      <CopyrightContainer>
+        <Typography>
+            {"Created by Duke Ko "}
+        </Typography>
+        <div>
+          <Grid container direction="row" alignItems="center" alignContent="center" justify="center">
+            <Link color="inherit" href="https://www.linkedin.com/in/duke-ko-01ab03169/">
+              <LinkGrid container direction="row" alignItems="center" >
+                <LinkedInIcon style={{marginRight: "3px"}} />LinkedIn
+              </LinkGrid>
+            </Link>
+            |
+            <Link color="inherit" href="https://github.com/dukhyunko93/BasketballStatTracker">
+              <LinkGrid container direction="row" alignItems="center">
+                <GitHubIcon style={{marginRight: "5px"}} fontSize="small"/> GitHub
+              </LinkGrid>
+            </Link>
+          </Grid>
+        </div>
+      </CopyrightContainer>
   );
 }
 

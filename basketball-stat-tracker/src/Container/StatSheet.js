@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { updatePlayerStat } from "../action/matchAction"
+import { updatePlayerStat, updateScoreBoard } from "../action/matchAction"
 import "./StatSheet.css";
 import { Paper } from "@material-ui/core";
 import Bench from "../component/Bench";
@@ -23,7 +23,8 @@ function StatSheet(props){
     const [awayColumn, setAwayColumns] = useState(awayInfo);
 
     const updateStats = (updatedPlayer, team, scoreDifference) => {
-        props.updatePlayerStat(updatedPlayer, team, scoreDifference)
+        props.updatePlayerStat(updatedPlayer, team)
+        if(scoreDifference) props.updateScoreBoard(team, scoreDifference)
     }
 
     // Drag players from bench to court or vice versa
@@ -90,7 +91,8 @@ function StatSheet(props){
 
 const mapDispatchToProps = dispatch => {
     const combinedActions = {
-        updatePlayerStat
+        updatePlayerStat,
+        updateScoreBoard
     }
     return bindActionCreators(combinedActions, dispatch);
 }
