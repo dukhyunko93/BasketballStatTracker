@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Typography, Link, Grid } from "@material-ui/core"
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import './Footer.css'
 
 const FooterContainer = styled.div`
   position: relative;

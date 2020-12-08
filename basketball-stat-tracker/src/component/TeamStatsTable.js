@@ -1,22 +1,20 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import PlayerRow from "./PlayerRow"
 import './PlayerRow.css'
+import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, Container } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    table: {
-        margin: "10px",
-        width: "fit-content",
-    },
-    container:{
-        width: "fit-content",
-        maxWidth: "none"
-    }
-});
+const TableContainer = styled(Container)`
+    width: fit-content;
+    maxWidth: none;
+`
+
+const StatTable = styled(Table)`
+    margin: 10px;
+    width: fit-content;
+`
 
 export default function TeamStatsTable(props) {
-    const classes = useStyles();
     // Render each players as a row on the table
     const createPlayers = () => {
         return props.players.map((player) => <PlayerRow team={props.team} updateStats={props.updateStats} key={player.id} player={player} />)
@@ -30,8 +28,8 @@ export default function TeamStatsTable(props) {
         )
     }
     return (
-        <Container className={classes.container}>
-            <Table className={classes.table} aria-label="simple table">
+        <TableContainer>
+            <StatTable>
                 <TableHead>
                     <TableRow>
                         {createHeaders()}
@@ -40,7 +38,7 @@ export default function TeamStatsTable(props) {
                 <TableBody>
                     {createPlayers()}
                 </TableBody>
-            </Table>
-        </Container>
+            </StatTable>
+        </TableContainer>
     );
 }

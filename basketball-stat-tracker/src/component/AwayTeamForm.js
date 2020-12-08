@@ -1,21 +1,15 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from "styled-components";
 import NewPlayer from './NewPlayer'
 import { FormControl, InputLabel, Input, FormHelperText, Button} from '@material-ui/core';
 import nextId from "react-id-generator";
 
-const useStyles = makeStyles((theme) => ({
-    margin: {
-      margin: '8px',
-    },
-    textField: {
-      width: '25ch',
-    },
-}));
+const FormControlContainer = styled(FormControl)`
+    margin: 8px;
+    width: 25ch;
+`
 
 function AwayTeam (props){
-    const classes = useStyles();
     let htmlId = nextId();
 
     const addPlayer = () => {
@@ -65,11 +59,11 @@ function AwayTeam (props){
         <>
             <div>
                 <h2>Away Team Roster</h2>
-                <FormControl className={clsx(classes.margin, classes.textField)}>
+                <FormControlContainer>
                     <InputLabel>Away Team</InputLabel>
                     <Input id="away-team" name="awayTeam" value={props.awayTeamName} onChange={(e) => props.setAwayTeamName(e.target.value)} />
                     <FormHelperText>Type the team name.</FormHelperText>
-                </FormControl>
+                </FormControlContainer>
             </div>
             {renderPlayers()}
             <Button id="add-player" onClick={addPlayer} >Add Player</Button>

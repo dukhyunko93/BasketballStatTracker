@@ -1,25 +1,27 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from "styled-components";
 import { Box, FormControl, InputLabel, Input, MenuItem, Select, Button} from '@material-ui/core';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 
-const useStyles = makeStyles((theme) => ({
-    margin: {
-      margin: theme.spacing(1),
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(0),
-    },
-    textField: {
-      width: '20ch',
-    },
-    inputField: {
-        width: "120px",
-    }
-}));
+const BoxContainer = styled(Box)`
+    display:flex;
+    margin-top: 5px;
+`
+const TextFieldControl = styled(FormControl)`
+    width: 20ch;
+    margin: 8px;
+    margin-top: 0;
+`
+
+const DropdownControl = styled(FormControl)`
+    margin-top: 0;
+    width: 120px;
+`
+
+const DeleteButton = styled(Button)`
+    min-width: 10px !important;
+`
 export default function NewPlayer (props){
-    const classes = useStyles();
     
     const onChange = (e) => {
         props.updatePlayerInfo(props.id, e.target, props.team)
@@ -27,20 +29,20 @@ export default function NewPlayer (props){
 
     return (
         <>
-            <Box display="flex">
-                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+            <BoxContainer>
+                <TextFieldControl>
                     <InputLabel>First Name</InputLabel>
                     <Input name="firstName" value={props.firstName} onChange={onChange} />
-                </FormControl>                                
-                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                </TextFieldControl>                                
+                <TextFieldControl>
                     <InputLabel>Last Name</InputLabel>
                     <Input name="lastName" value={props.lastName} onChange={onChange} />
-                </FormControl>
-                <FormControl className={clsx(classes.margin, classes.withoutLabel, classes.textField)}>
+                </TextFieldControl>
+                <TextFieldControl>
                     <InputLabel>Jersey #</InputLabel>
                     <Input name="jerseyNumber" value={props.jerseyNumber} onChange={onChange} />
-                </FormControl>
-                <FormControl className={clsx(classes.withoutLabel, classes.inputField)}>
+                </TextFieldControl>
+                <DropdownControl >
                     <InputLabel>Position</InputLabel>
                     <Select name="position" value={props.position} onChange={onChange}>
                         <MenuItem value={"PG"}>PG</MenuItem>
@@ -49,11 +51,11 @@ export default function NewPlayer (props){
                         <MenuItem value={"PF"}>PF</MenuItem>
                         <MenuItem value={"C"}>C</MenuItem>
                     </Select>
-                </FormControl>
-                <Button style={{minWidth: 10, position: "relative"}} onClick={() => props.deletePlayer(props.id, props.team)}>
+                </DropdownControl>
+                <DeleteButton onClick={() => props.deletePlayer(props.id, props.team)}>
                     <HighlightOff style={{color:"#ff6961"}} />
-                </Button>
-            </Box>
+                </DeleteButton>
+            </BoxContainer>
         </>
     )
 }

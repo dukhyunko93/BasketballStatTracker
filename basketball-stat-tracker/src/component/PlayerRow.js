@@ -1,34 +1,28 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react'
+import styled from "styled-components";
 import { TableCell, TableRow, Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
-const useStyles = makeStyles({
-    buttonFG:{
-        minWidth: "25px",
-        minHeight: "25px",
-        padding: "0",
-        borderRadius: "50%",
-        marginRight: "auto",
-        marginLeft: "auto",
-        color: "#c2c2d6"
-    },
-    buttonStats:{
-        minWidth: "25px",
-        minHeight: "25px",
-        padding: "0",
-        borderRadius: "50%",
-        marginRight: "5px",
-        marginLeft: "5px",
-        color: "#c2c2d6"
-    }
-});
-
+const buttonStyle = `
+    min-width: 25px;
+    min-height: 25px;
+    padding: 0;
+    border-radius: 50%;
+    color: #c2c2d6;
+`
+const ButtonFG = styled(Button)`
+    ${buttonStyle}
+    margin-right: auto;
+    margin-left: auto;
+`
+const ButtonStats = styled(Button)`
+    ${buttonStyle}
+    margin-right: 5px;
+    margin-left: 5px;
+`
 export default function PlayerRow(props) {
     const{player, team} = props
-
-    const classes = useStyles();
 
     const statCategory = { 0: "REB", 1: "AST", 2: "STL", 3: "BLK", 4: "TO", 5: "PF" }
     const addStat = (index) => {
@@ -98,8 +92,8 @@ export default function PlayerRow(props) {
         const scoreCategory = ["FGA", "FGM", "TPA", "TPM", "FTA", "FTM"]
         return scoreCategory.map((type, index) => 
             <TableCell key={index} className="point-control">
-                <Button onClick={() => subtractScore(type)} className={classes.buttonFG}><RemoveCircleOutlineIcon /></Button>
-                <Button onClick={() => addScore(type)} className={classes.buttonFG}><AddCircleOutlineIcon /></Button>
+                <ButtonFG onClick={() => subtractScore(type)} ><RemoveCircleOutlineIcon /></ButtonFG>
+                <ButtonFG onClick={() => addScore(type)} ><AddCircleOutlineIcon /></ButtonFG>
             </TableCell>
         );
     };
@@ -109,9 +103,9 @@ export default function PlayerRow(props) {
         const stats = [REB, AST, STL, BLK, TO, PF]
         return stats.map((stat, index) => 
             <TableCell key={index} className="point-control">
-                <Button onClick={() => subtractStat(index)} className={classes.buttonStats}><RemoveCircleOutlineIcon /></Button>
+                <ButtonStats onClick={() => subtractStat(index)}><RemoveCircleOutlineIcon /></ButtonStats>
                     {stat}
-                <Button onClick={() => addStat(index)} className={classes.buttonStats}><AddCircleOutlineIcon /></Button>
+                <ButtonStats onClick={() => addStat(index)}><AddCircleOutlineIcon /></ButtonStats>
             </TableCell>
         );
     };
