@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { hideNavBar } from "../action/navBarAction"
-import { saveBoxScore } from "../action/boxScoreAction"
 import { updatePlayerStat } from "../action/matchAction"
 import "./StatSheet.css";
 import { Paper } from "@material-ui/core";
@@ -26,10 +24,6 @@ function StatSheet(props){
 
     const updateStats = (updatedPlayer, team, scoreDifference) => {
         props.updatePlayerStat(updatedPlayer, team, scoreDifference)
-    }
-
-    const submitBoxScore = () => {
-        props.saveBoxScore(props.match)
     }
 
     // Drag players from bench to court or vice versa
@@ -65,10 +59,9 @@ function StatSheet(props){
         }
     };
 
-    props.hideNavBar();
     return(
         <div className="container" >
-            <ScoreBox submitBoxScore={submitBoxScore} homeTeamScore={props.match.homeTeamScore} awayTeamScore={props.match.awayTeamScore} />
+            <ScoreBox homeTeamScore={props.match.homeTeamScore} awayTeamScore={props.match.awayTeamScore} />
             <div className="stat-container">
                 <div className="team-container">
                     <h5 className="team-name">{props.match.homeTeamName}</h5>
@@ -97,8 +90,6 @@ function StatSheet(props){
 
 const mapDispatchToProps = dispatch => {
     const combinedActions = {
-        hideNavBar,
-        saveBoxScore,
         updatePlayerStat
     }
     return bindActionCreators(combinedActions, dispatch);
