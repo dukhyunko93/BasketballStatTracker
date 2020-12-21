@@ -1,6 +1,5 @@
 import React from 'react';
 import PlayerRow from "./PlayerRow"
-import './PlayerRow.css'
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, Container } from '@material-ui/core';
 

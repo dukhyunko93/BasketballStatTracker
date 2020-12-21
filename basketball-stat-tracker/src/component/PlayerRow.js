@@ -1,4 +1,5 @@
 import React from 'react'
+import './PlayerRow.css'
 import styled from "styled-components";
 import { TableCell, TableRow, Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
