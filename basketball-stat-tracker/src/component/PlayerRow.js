@@ -5,21 +5,20 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 const buttonStyle = `
-    min-width: 25px;
-    min-height: 25px;
-    padding: 0;
-    border-radius: 50%;
-    color: #c2c2d6;
+    min-width: 25px !important;
+    min-height: 25px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
 `
 const ButtonFG = styled(Button)`
     ${buttonStyle}
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: auto !important;
+    margin-left: auto !important;
 `
 const ButtonStats = styled(Button)`
     ${buttonStyle}
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 5px !important;
+    margin-left: 5px !important;
 `
 export default function PlayerRow(props) {
     const{player, team} = props
@@ -113,7 +112,7 @@ export default function PlayerRow(props) {
     return (
         <>
             <TableRow key={player.id}>
-                <TableCell className="point-control">{player.firstName[0]}.{player.lastName}</TableCell>
+                <TableCell className="point-control">{player.firstName}, {player.lastName}</TableCell>
                 <TableCell className="point-control">{player.jerseyNumber}</TableCell>
                 {renderScoreController()}
                 <TableCell className="point-control">{player.stats.FGM} / {player.stats.FGA}</TableCell>

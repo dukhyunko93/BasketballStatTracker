@@ -27,8 +27,8 @@ const matchExample = {
         },
         {            
         id: uuid(),
-        firstName: "Portis",
-        lastName: "Bobby",
+        firstName: "Bobby",
+        lastName: "Portis",
         jerseyNumber: 1,
         position: "PF",
         stats:{
@@ -49,8 +49,8 @@ const matchExample = {
         },
         {            
         id: uuid(),
-        firstName: "Randle",
-        lastName: "Julius",
+        firstName: "Julius",
+        lastName: "Randle",
         jerseyNumber: 30,
         position: "PF",
         stats:{

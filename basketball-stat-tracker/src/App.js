@@ -6,7 +6,7 @@ import Footer from './component/Footer'
 import HomePage from './container/HomePage'
 import NewMatchForm from './container/NewMatchForm'
 import StatSheet from './container/StatSheet'
-import FinalBoxScore from './container/FinalBoxScore'
+import ExportPage from './container/ExportPage'
 
 const App = () => {
     return (
@@ -16,7 +16,7 @@ const App = () => {
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
                 <Route exact path="/statsheet" render={() => <StatSheet />} />
-                <Route exact path="/finalboxscore" render={() => <FinalBoxScore />} />
+                <Route exact path="/exportpage" render={() => <ExportPage />} />
                 <Footer />
             </Router>
         </>

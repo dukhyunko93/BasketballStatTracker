@@ -2,21 +2,19 @@ import React from "react";
 import '../container/StatSheet.css';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
-const useStyles = makeStyles((theme) => ({
-    popover: {
-            pointerEvents: 'none',
-    },
-    paper: {
-            padding: theme.spacing(1),
-    },
-}));
+const PopoverName = styled(Popover)`
+    pointer-events: none;
+`
+
+const PlayerNameTypography = styled(Typography)`
+    padding: 5px;
+`
 
 export default function PlayerCircle(props){
     const {player, index} = props
-    const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handlePopoverOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -52,12 +50,8 @@ export default function PlayerCircle(props){
                     );
                 }}
             </Draggable>
-            <Popover
+            <PopoverName
                 id="mouse-over-popover"
-                className={classes.popover}
-                classes={{
-                paper: classes.paper,
-                }}
                 open={open}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -71,8 +65,8 @@ export default function PlayerCircle(props){
                 onClose={handlePopoverClose}
                 disableRestoreFocus
             >
-                <Typography>{player.firstName} {player.lastName}</Typography>
-            </Popover>
+                <PlayerNameTypography>{player.firstName} {player.lastName}</PlayerNameTypography>
+            </PopoverName>
         </>
     );
 }
