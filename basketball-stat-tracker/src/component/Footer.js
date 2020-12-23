@@ -5,8 +5,8 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const FooterContainer = styled.div`
-  position: relative;
-  bottom: 0;
+  position: relative; 
+  bottom: 0px; 
   padding-top: 2vh;
   padding-left: 2vh;
   padding-right: 2vh;

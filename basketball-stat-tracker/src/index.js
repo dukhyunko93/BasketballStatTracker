@@ -5,15 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store'
-// import { createStore } from 'redux'
-// import reducer from './reducers/reducerIndex'
-
-// let store = createStore(reducer)
 
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            {/* <ConnectedApp /> */}
             <App />
         </React.StrictMode>
     </Provider>,

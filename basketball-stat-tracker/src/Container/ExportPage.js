@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import FinalBoxScore from "../component/FinalBoxScore"
 import styled from "styled-components";
 import { connect } from 'react-redux'
+import ExportExcel from '../component/ExportExcel' 
 
 const TeamContainer = styled.div`
     width: 100% !important;
@@ -36,6 +37,7 @@ function ExportPage(props){
         <>  
             <TeamContainer>
                 <h1>{teamStat.name}</h1><button onClick={statDisplayHandler} >View {team} Team</button>
+                <ExportExcel homeStat={homeStat} awayStat={awayStat}/>
                 <FinalBoxScore players={teamStat.players} />
             </TeamContainer>
         </>

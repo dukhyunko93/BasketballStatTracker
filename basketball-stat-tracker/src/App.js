@@ -17,8 +17,8 @@ const App = () => {
                 <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
                 <Route exact path="/statsheet" render={() => <StatSheet />} />
                 <Route exact path="/exportpage" render={() => <ExportPage />} />
-                <Footer />
             </Router>
+            <Footer />
         </>
     );
 }
