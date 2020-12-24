@@ -7,8 +7,8 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 function ExportExcel (props) {
 
-    const [homeTeam, setHomeTeam] = useState([])
-    const [awayTeam, setAwayTeam] = useState([])
+    const [homeTeam, setHomeTeam] = useState([]);
+    const [awayTeam, setAwayTeam] = useState([]);
 
     const makePlayerData = (players, callback) => {
         let team = [];
@@ -39,7 +39,7 @@ function ExportExcel (props) {
     useEffect(() => {
         makePlayerData(props.homeStat.players, setHomeTeam);
         makePlayerData(props.awayStat.players, setAwayTeam);
-    }, [props.homeStat.players, props.awayStat.players])
+    }, [props.homeStat.players, props.awayStat.players]);
 
     return (
         <ExcelFile>

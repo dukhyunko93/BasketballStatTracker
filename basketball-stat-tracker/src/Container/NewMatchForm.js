@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../component/Navbar'
 import { Redirect } from "react-router";
 import { saveMatch } from "../action/matchAction";
 import { connect } from 'react-redux'
@@ -9,7 +8,7 @@ import AwayTeamForm from '../component/AwayTeamForm';
 import HomeTeamForm from '../component/HomeTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
-import matchExample from "../component/TeamExample";
+// import matchExample from "../component/TeamExample";
 
 let htmlId = nextId();
 
@@ -69,15 +68,17 @@ function NewMatchForm(props){
         }
     }
 
-    const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
-    const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
+    // testing with repopulated data
+    // const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
+    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
+    // const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
+    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
 
-    // const [homeTeamName, setHomeTeamName] = useState("");
-    // const [homeTeamPlayers, setHomeTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
-    // const [awayTeamName, setAwayTeamName] = useState("");
-    // const [awayTeamPlayers, setAwayTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
+    // empty data
+    const [homeTeamName, setHomeTeamName] = useState("");
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
+    const [awayTeamName, setAwayTeamName] = useState("");
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState([ INITIAL_PLAYER_STATE ]);
 
 
     const [redirect, setRedirect] = useState(false);
