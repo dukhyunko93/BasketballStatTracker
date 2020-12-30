@@ -33,7 +33,7 @@ function ExportPage(props){
         team === "Away" ? setTeamStat(awayStat) : setTeamStat(homeStat)
     }
 
-    return(
+    return(  
         <>  
             <TeamContainer>
                 <h1>{teamStat.name}</h1><button onClick={statDisplayHandler} >View {team} Team</button>
