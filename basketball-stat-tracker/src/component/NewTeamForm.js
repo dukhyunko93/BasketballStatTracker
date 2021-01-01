@@ -9,12 +9,12 @@ const FormControlContainer = styled(FormControl)`
     width: 25ch;
 `
 
-function HomeTeam (props){
+function HomeTeam ({ team, deletePlayer, teamPlayers, teamName, setTeamName, setTeamPlayers, updatePlayerInfo }){
     let htmlId = nextId();
 
     const addPlayer = () => {
-        props.setHomeTeamPlayers([
-            ...props.homeTeamPlayers,{
+        setTeamPlayers([
+            ...teamPlayers,{
                 id: htmlId,
                 firstName: "",
                 lastName: "",
@@ -40,17 +40,17 @@ function HomeTeam (props){
     }
 
     const renderPlayers = () => {
-        return props.homeTeamPlayers.map(player => 
+        return teamPlayers.map(player => 
             <NewPlayer
-                team="home"
+                team={team}
                 key={player.id}
                 id={player.id}
                 firstName={player.firstName}
                 lastName={player.lastName}
                 jerseyNumber={player.jerseyNumber}
                 position={player.position}
-                updatePlayerInfo={props.updatePlayerInfo}
-                deletePlayer={props.deletePlayer}
+                updatePlayerInfo={updatePlayerInfo}
+                deletePlayer={deletePlayer}
             />
         );
     }
@@ -58,10 +58,10 @@ function HomeTeam (props){
     return (
         <>
             <div>
-                <h2>Home Team Roster</h2>
+                <h2>{team} Team Roster</h2>
                 <FormControlContainer>
-                    <InputLabel>Home Team</InputLabel>
-                    <Input id="home-team" name="homeTeam" value={props.homeTeamName} onChange={(e) => props.setHomeTeamName(e.target.value)} />
+                    <InputLabel>{team} Team</InputLabel>
+                    <Input value={teamName} onChange={(e) => setTeamName(e.target.value)} />
                     <FormHelperText>Type the team name.</FormHelperText>
                 </FormControlContainer>
             </div>

@@ -8,7 +8,8 @@ import NewMatchForm from './container/NewMatchForm'
 import StatSheet from './container/StatSheet'
 import ExportPage from './container/ExportPage'
 
-const App = () => {
+const App = (props) => {
+    console.log(props)
     return (
         <>
             <Navbar /> 
