@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects'
 
 function* helloSaga() {
-  yield console.log('Hello Sagas!')
+  console.log('Hello Sagas!')
 }
 
 

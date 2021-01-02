@@ -9,12 +9,12 @@ const FormControlContainer = styled(FormControl)`
     width: 25ch;
 `
 
-function HomeTeam ({ team, deletePlayer, teamPlayers, teamName, setTeamName, setTeamPlayers, updatePlayerInfo }){
+function HomeTeam (props){
     let htmlId = nextId();
 
     const addPlayer = () => {
-        setTeamPlayers([
-            ...teamPlayers,{
+        props.setHomeTeamPlayers([
+            ...props.homeTeamPlayers,{
                 id: htmlId,
                 firstName: "",
                 lastName: "",
@@ -40,17 +40,17 @@ function HomeTeam ({ team, deletePlayer, teamPlayers, teamName, setTeamName, set
     }
 
     const renderPlayers = () => {
-        return teamPlayers.map(player => 
+        return props.homeTeamPlayers.map(player => 
             <NewPlayer
-                team={team}
+                team="home"
                 key={player.id}
                 id={player.id}
                 firstName={player.firstName}
                 lastName={player.lastName}
                 jerseyNumber={player.jerseyNumber}
                 position={player.position}
-                updatePlayerInfo={updatePlayerInfo}
-                deletePlayer={deletePlayer}
+                updatePlayerInfo={props.updatePlayerInfo}
+                deletePlayer={props.deletePlayer}
             />
         );
     }
@@ -58,10 +58,10 @@ function HomeTeam ({ team, deletePlayer, teamPlayers, teamName, setTeamName, set
     return (
         <>
             <div>
-                <h2>{team} Team Roster</h2>
+                <h2>Home Team Roster</h2>
                 <FormControlContainer>
-                    <InputLabel>{team} Team</InputLabel>
-                    <Input value={teamName} onChange={(e) => setTeamName(e.target.value)} />
+                    <InputLabel>Home Team</InputLabel>
+                    <Input id="home-team" name="homeTeam" value={props.homeTeamName} onChange={(e) => props.setHomeTeamName(e.target.value)} />
                     <FormHelperText>Type the team name.</FormHelperText>
                 </FormControlContainer>
             </div>
