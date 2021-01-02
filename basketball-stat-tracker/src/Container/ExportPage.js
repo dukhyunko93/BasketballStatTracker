@@ -11,18 +11,18 @@ const TeamContainer = styled.div`
     padding: 10px;
 `
 
-function ExportPage(props){
+function ExportPage({ match }){
 
     const homeStat = {
-        name: props.match.homeTeamName,
-        players: props.match.homeTeamPlayers,
-        score: props.match.homeTeamScore
+        name: match.homeTeamName,
+        players: match.homeTeamPlayers,
+        score: match.homeTeamScore
     }
     
     const awayStat = {
-        name: props.match.awayTeamName,
-        players: props.match.awayTeamPlayers,
-        score: props.match.awayTeamScore
+        name: match.awayTeamName,
+        players: match.awayTeamPlayers,
+        score: match.awayTeamScore
     }
 
     const [team, setTeam] = useState("Away");
