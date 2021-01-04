@@ -28,14 +28,14 @@ export default function PlayerRow(props) {
     const addStat = (index) => {
         let stat = statCategory[index];
         player.stats[stat]++;
-        props.updateStats(player, team);
+        props.updateStats(team);
     }
 
     const subtractStat = (index) => {
         let stat = statCategory[index];
         player.stats[stat]--;
         if(player.stats[stat] < 0) player.stats[stat] = 0;
-        props.updateStats(player, team);
+        props.updateStats(team);
     }
 
     const addScore = (type) => {
@@ -57,7 +57,7 @@ export default function PlayerRow(props) {
         let newScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 1)
         let scoreDifference = newScore - player.stats["PTS"]
         player.stats["PTS"] = newScore
-        props.updateStats(player, team, scoreDifference)
+        props.updateStats(team, scoreDifference)
     }
 
     const subtractScore = type => {
@@ -85,7 +85,7 @@ export default function PlayerRow(props) {
         let newScore = (player.stats["FGM"] * 2) + (player.stats["FTM"] * 1) + (player.stats["TPM"] * 1)
         let scoreDifference = newScore - player.stats["PTS"]
         player.stats["PTS"] = newScore
-        props.updateStats(player, team, scoreDifference)
+        props.updateStats(team, scoreDifference)
     }
 
     const renderScoreController = () => {

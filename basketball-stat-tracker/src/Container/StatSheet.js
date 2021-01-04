@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { updatePlayerStat, updateScoreBoard } from "../action/matchAction"
+import { Link } from 'react-router-dom';
 import "./StatSheet.css";
-import { Paper } from "@material-ui/core";
+import { Paper, Button } from "@material-ui/core";
 import Bench from "../component/Bench";
 import ScoreBox from "../component/ScoreBox"
 import TeamStatsTable from "../component/TeamStatsTable"
@@ -18,13 +17,36 @@ function StatSheet(props){
         "Court":[],
         "Bench": props.match.awayTeamPlayers,
     }
-    
-    const [homeColumn, setHomeColumns] = useState(homeInfo);
-    const [awayColumn, setAwayColumns] = useState(awayInfo);
 
-    const updateStats = (updatedPlayer, team, scoreDifference) => {
-        props.updatePlayerStat(updatedPlayer, team)
-        if(scoreDifference) props.updateScoreBoard(team, scoreDifference)
+    const score = {
+        homeTeamScore: props.match.homeTeamScore,
+        awayTeamScore: props.match.awayTeamScore
+    }
+    
+    const [homeColumn, setHomeColumns] = useState(JSON.parse(sessionStorage.getItem("homeInfo")) || homeInfo);
+    const [awayColumn, setAwayColumns] = useState(JSON.parse(sessionStorage.getItem("awayInfo")) || awayInfo);
+    const [scoreBoard, setScoreBoard] = useState(JSON.parse(sessionStorage.getItem("score")) || score);
+
+    const updateStats = (team, scoreDifference) => {
+        if (team === "home"){
+            setHomeColumns({...homeColumn})
+            if(scoreDifference){
+                let totalScore = scoreBoard.homeTeamScore + scoreDifference
+                setScoreBoard({
+                    ...scoreBoard,
+                    homeTeamScore: totalScore
+                })
+            }
+        } else {
+            setAwayColumns({...awayColumn})
+            if(scoreDifference){
+                let totalScore = scoreBoard.awayTeamScore + scoreDifference
+                setScoreBoard({
+                    ...scoreBoard,
+                    awayTeamScore: totalScore
+                })
+            }
+        }
     }
 
     // Drag players from bench to court or vice versa
@@ -60,9 +82,18 @@ function StatSheet(props){
         }
     };
 
+    useEffect(() => {
+        sessionStorage.setItem("score", JSON.stringify(scoreBoard));
+        sessionStorage.setItem("homeInfo", JSON.stringify(homeColumn));
+        sessionStorage.setItem("awayInfo", JSON.stringify(awayColumn));
+    });
+    
     return(
         <div className="container" >
-            <ScoreBox homeTeamScore={props.match.homeTeamScore} awayTeamScore={props.match.awayTeamScore} />
+            <ScoreBox homeTeamScore={scoreBoard.homeTeamScore} awayTeamScore={scoreBoard.awayTeamScore} />
+            <Button component={ Link } to="/exportpage" >
+                Submit
+            </Button>
             <div className="stat-container">
                 <div className="team-container">
                     <h5 className="team-name">{props.match.homeTeamName}</h5>
@@ -89,16 +120,8 @@ function StatSheet(props){
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    const combinedActions = {
-        updatePlayerStat,
-        updateScoreBoard
-    }
-    return bindActionCreators(combinedActions, dispatch);
-}
-
 const mapStateToProps = (state) => ({
     match: state.matchReducer
   })
   
-export default connect(mapStateToProps, mapDispatchToProps)(StatSheet);
+export default connect(mapStateToProps, null)(StatSheet);

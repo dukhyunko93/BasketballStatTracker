@@ -7,7 +7,7 @@ import './NewMatchForm.css';
 import NewTeamForm from '../component/NewTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
-import matchExample from "../component/TeamExample";
+// import matchExample from "../component/TeamExample";
 
 let htmlId = nextId();
 
@@ -69,16 +69,16 @@ function NewMatchForm(props){
     }
 
     // testing with repopulated data
-    const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
-    const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
+    // const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
+    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
+    // const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
+    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
 
-    // empty data
-    // const [homeTeamName, setHomeTeamName] = useState(localStorage.getItem("homeTeamName") || "");
-    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(JSON.parse(localStorage.getItem("homeTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
-    // const [awayTeamName, setAwayTeamName] = useState(localStorage.getItem("awayTeamName") || "");
-    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(JSON.parse(localStorage.getItem("awayTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
+    // // empty data
+    const [homeTeamName, setHomeTeamName] = useState(sessionStorage.getItem("homeTeamName") || "");
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState(JSON.parse(sessionStorage.getItem("homeTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
+    const [awayTeamName, setAwayTeamName] = useState(sessionStorage.getItem("awayTeamName") || "");
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState(JSON.parse(sessionStorage.getItem("awayTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
 
     const [redirect, setRedirect] = useState(false);
 
@@ -94,10 +94,10 @@ function NewMatchForm(props){
     }
 
     useEffect(() => {
-        localStorage.setItem("homeTeamName", homeTeamName);
-        localStorage.setItem("homeTeamPlayers", JSON.stringify(homeTeamPlayers));
-        localStorage.setItem("awayTeamName", awayTeamName);
-        localStorage.setItem("awayTeamPlayers", JSON.stringify(awayTeamPlayers));
+        sessionStorage.setItem("homeTeamName", homeTeamName);
+        sessionStorage.setItem("homeTeamPlayers", JSON.stringify(homeTeamPlayers));
+        sessionStorage.setItem("awayTeamName", awayTeamName);
+        sessionStorage.setItem("awayTeamPlayers", JSON.stringify(awayTeamPlayers));
     });
     
     if (redirect) {
