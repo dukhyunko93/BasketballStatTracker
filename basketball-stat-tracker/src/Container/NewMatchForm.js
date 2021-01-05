@@ -7,7 +7,8 @@ import './NewMatchForm.css';
 import NewTeamForm from '../component/NewTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
-import matchExample from "../component/TeamExample";
+import ConfirmModal from "../component/StatConfirmModal"
+// import matchExample from "../component/TeamExample";
 
 let htmlId = nextId();
 
@@ -35,6 +36,29 @@ const INITIAL_PLAYER_STATE = {
 }    
 
 function NewMatchForm(props){
+    // testing with repopulated data
+    // const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
+    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
+    // const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
+    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
+
+    // // empty data
+    const teamInfo = JSON.parse(localStorage.getItem("teamInfo"))
+    const [homeTeamName, setHomeTeamName] = useState(teamInfo ? teamInfo.homeTeamName : "");
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState(teamInfo ? teamInfo.homeTeamPlayers : [ INITIAL_PLAYER_STATE ]);
+    const [awayTeamName, setAwayTeamName] = useState(teamInfo ? teamInfo.awayTeamName : "");
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState(teamInfo ? teamInfo.awayTeamPlayers : [ INITIAL_PLAYER_STATE ]);
+
+    const [redirect, setRedirect] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const updatePlayerInfo = (id, info, team) => {
         if (team === "Home"){
@@ -68,21 +92,6 @@ function NewMatchForm(props){
         }
     }
 
-    // testing with repopulated data
-    const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
-    const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
-
-    // // empty data
-    const teamInfo = JSON.parse(localStorage.getItem("teamInfo"))
-    // const [homeTeamName, setHomeTeamName] = useState(teamInfo ? teamInfo.homeTeamName : "");
-    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(teamInfo ? teamInfo.homeTeamPlayers : [ INITIAL_PLAYER_STATE ]);
-    // const [awayTeamName, setAwayTeamName] = useState(teamInfo ? teamInfo.awayTeamName : "");
-    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(teamInfo ? teamInfo.awayTeamPlayers : [ INITIAL_PLAYER_STATE ]);
-
-    const [redirect, setRedirect] = useState(false);
-
     const submitHandler = (e) => {
         e.preventDefault()
         props.saveMatch({
@@ -105,9 +114,18 @@ function NewMatchForm(props){
 
         return function() {
             localStorage.setItem("teamInfo", null);
+            localStorage.setItem("match", null);
         }
     });
     
+    const clearForm = () => {
+        setHomeTeamName("")
+        setHomeTeamPlayers([ INITIAL_PLAYER_STATE ])
+        setAwayTeamName("")
+        setAwayTeamPlayers([ INITIAL_PLAYER_STATE ])
+        handleClose()
+    }
+
     if (redirect) {
       return <Redirect to="/statsheet"/>;
     }
@@ -139,10 +157,12 @@ function NewMatchForm(props){
                         />
                     </div>
                 </div>
-                <div id="submit-btn">
+                <div id="btn-div">
                     <Button type="submit" >Submit Teams</Button>
+                    <Button onClick={handleOpen} >Clear Teams</Button>
                 </div>
             </form>
+            <ConfirmModal submitHandler={clearForm} handleClose={handleClose} open={open} />
         </>
     );
 }

@@ -1,4 +1,4 @@
-import{ SAVE_MATCH, GET_MATCH, UPDATE_PLAYER_STAT, UPDATE_SCORE_BOARD } from '../action/actionType'
+import{ SAVE_MATCH, GET_MATCH, SAVE_STAT } from '../action/actionType'
 
 const INITIAL_STATE = {
         homeTeamScore: 0,
@@ -21,38 +21,49 @@ const matchReducer = (state = INITIAL_STATE, action) => {
                 awayTeamPlayers: action.match.awayTeamPlayers,
             }
         }
-        case GET_MATCH:
-            return state;
-        
-        case UPDATE_PLAYER_STAT:{
-            if (action.team === "home"){
-                let filteredPlayers = state.homeTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
-                return{
-                    ...state,
-                    homeTeamPlayers: [...filteredPlayers, action.updatedPlayer]
-                }
-            } else {
-                let filteredPlayers = state.awayTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
-                return{
-                    ...state,
-                    awayTeamPlayers:[...filteredPlayers, action.updatedPlayer]
-                }
+
+        case SAVE_STAT: {
+            return {
+                ...state,
+                homeTeamScore: action.match.homeTeamScore,
+                awayTeamScore: action.match.awayTeamScore,
+                homeTeamPlayers: action.match.homeTeamPlayers,
+                awayTeamPlayers: action.match.awayTeamPlayers,
             }
         }
 
-        case UPDATE_SCORE_BOARD:{
-            if (action.team === "home"){
-                return{
-                    ...state,
-                    homeTeamScore: state.homeTeamScore + action.scoreDifference
-                }
-            } else {
-                return{
-                    ...state,
-                    awayTeamScore: state.awayTeamScore + action.scoreDifference
-                }
-            }
-        }
+        case GET_MATCH:
+            return state;
+        
+        // case UPDATE_PLAYER_STAT:{
+        //     if (action.team === "home"){
+        //         let filteredPlayers = state.homeTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
+        //         return{
+        //             ...state,
+        //             homeTeamPlayers: [...filteredPlayers, action.updatedPlayer]
+        //         }
+        //     } else {
+        //         let filteredPlayers = state.awayTeamPlayers.filter(player => player.id !== action.updatedPlayer.id)
+        //         return{
+        //             ...state,
+        //             awayTeamPlayers:[...filteredPlayers, action.updatedPlayer]
+        //         }
+        //     }
+        // }
+
+        // case UPDATE_SCORE_BOARD:{
+        //     if (action.team === "home"){
+        //         return{
+        //             ...state,
+        //             homeTeamScore: state.homeTeamScore + action.scoreDifference
+        //         }
+        //     } else {
+        //         return{
+        //             ...state,
+        //             awayTeamScore: state.awayTeamScore + action.scoreDifference
+        //         }
+        //     }
+        // }
 
         default:
             return state;

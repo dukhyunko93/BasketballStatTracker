@@ -16,31 +16,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ConfirmModal({handleClose, open}) {
+export default function ConfirmModal({submitHandler, handleClose, open}) {
     const classes = useStyles();
 
     return (
-            <div>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                timeout: 500,
-                }}
-            >
-                <Fade in={open}>
+        <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+            timeout: 500,
+            }}
+        >
+            <Fade in={open}>
                 <div className={classes.paper}>
                     <h2 id="transition-modal-title">Are you finished?</h2>
-                    <p id="transition-modal-description">You will not be able to edit your stat table when you press yes.</p>
-                    <Button>Yes</Button> <Button onClick={handleClose}>No</Button>
+                    <p id="transition-modal-description">You will not be able to edit when you press yes.</p>
+                    <Button onClick={submitHandler} >Yes</Button> <Button onClick={handleClose}>No</Button>
                 </div>
-                </Fade>
-            </Modal>
-        </div>
+            </Fade>
+        </Modal>
     );
 }

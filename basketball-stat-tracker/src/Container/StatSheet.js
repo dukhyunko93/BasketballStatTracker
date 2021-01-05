@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router";
 import { connect } from "react-redux";
+import { saveStat } from "../action/matchAction";
+import { bindActionCreators } from 'redux';
 import "./StatSheet.css";
 import { Paper, Button } from "@material-ui/core";
 import Bench from "../component/Bench";
@@ -15,7 +18,7 @@ function StatSheet(props){
         setOpen(true);
     };
     
-      const handleClose = () => {
+    const handleClose = () => {
         setOpen(false);
     };
     
@@ -27,6 +30,7 @@ function StatSheet(props){
             "Court":[],
             "Bench": props.match.homeTeamPlayers,
         }
+
     
     const awayInfo = match ? 
         match.awayInfo :
@@ -41,10 +45,11 @@ function StatSheet(props){
             homeTeamScore: props.match.homeTeamScore,
             awayTeamScore: props.match.awayTeamScore
         }
-    
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
     const [scoreBoard, setScoreBoard] = useState(score);
+    
+    console.log(props)
 
     const updateStats = (team, scoreDifference) => {
         if (team === "home"){
@@ -74,11 +79,11 @@ function StatSheet(props){
         const { source, destination, draggableId } = result;
         if (team === "home"){
             if (source.droppableId !== destination.droppableId) {
-                const sourceColumn = homeColumn[source.droppableId];
-                const destColumn = homeColumn[destination.droppableId];
+                let sourceColumn = homeColumn[source.droppableId];
+                let destColumn = homeColumn[destination.droppableId];
                 if(destination.droppableId === "Court" && destColumn.length >= 5) return;
-                const draggedPlayer = sourceColumn.find(player => player.id === draggableId);
-                const filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
+                let draggedPlayer = sourceColumn.find(player => player.id === draggableId);
+                let filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
                 setHomeColumns({
                     ...homeColumn,
                     [source.droppableId]: filteredPlayers,
@@ -87,11 +92,11 @@ function StatSheet(props){
             };
         } else {
             if (source.droppableId !== destination.droppableId) {
-                const sourceColumn = awayColumn[source.droppableId];
-                const destColumn = awayColumn[destination.droppableId];
+                let sourceColumn = awayColumn[source.droppableId];
+                let destColumn = awayColumn[destination.droppableId];
                 if(destination.droppableId === "Court" && destColumn.length >= 5) return;
-                const draggedPlayer = sourceColumn.find(player => player.id === draggableId);
-                const filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
+                let draggedPlayer = sourceColumn.find(player => player.id === draggableId);
+                let filteredPlayers = sourceColumn.filter(player => player.id !== draggableId);
                 setAwayColumns({
                     ...awayColumn,
                     [source.droppableId]: filteredPlayers,
@@ -101,8 +106,17 @@ function StatSheet(props){
         }
     };
 
-    const submitHandler = () => {
+    const [redirect, setRedirect] = useState(false);
 
+    const submitHandler = (e) => {
+        e.preventDefault()
+        props.saveStat({
+            homeTeamScore: scoreBoard.homeTeamScore,
+            awayTeamScore: scoreBoard.awayTeamScore,
+            homeTeamPlayers: homeColumn.Court.concat(homeColumn.Bench),
+            awayTeamPlayers: awayColumn.Court.concat(awayColumn.Bench),
+        })
+        setRedirect(true)
     }
 
     useEffect(() => {
@@ -117,43 +131,56 @@ function StatSheet(props){
             localStorage.setItem("match", null);
         }
     });
-    
+
+    if (redirect) {
+        return <Redirect to="/exportpage"/>;
+    }
+
     return(
-        <form onSubmit={submitHandler} className="container" >
-            <ConfirmModal handleClose={handleClose} open={open} />
-            <ScoreBox homeTeamScore={scoreBoard.homeTeamScore} awayTeamScore={scoreBoard.awayTeamScore} />
-            {/* <Button component={ Link } to="/exportpage" > */}
-            <Button onClick={handleOpen} >
-                Submit
-            </Button>
-            <div className="stat-container">
-                <div className="team-container">
-                    <h5 className="team-name">{props.match.homeTeamName}</h5>
-                    <div className="team-bench">
-                        <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
+        <>
+            <form onSubmit={(e) => submitHandler(e)} className="container" >
+                <ScoreBox homeTeamScore={scoreBoard.homeTeamScore} awayTeamScore={scoreBoard.awayTeamScore} />
+                {/* <Button component={ Link } to="/exportpage" > */}
+                <Button onClick={handleOpen} >
+                    Submit
+                </Button>
+                <div className="stat-container">
+                    <div className="team-container">
+                        <h5 className="team-name">{props.match.homeTeamName}</h5>
+                        <div className="team-bench">
+                            <Bench team="home" onDragEnd={onDragEnd} columns={homeColumn}/>
+                        </div>
                     </div>
+                    <Paper style={{minWidth: "900px",padding: "1px"}}>
+                        <TeamStatsTable team="home" updateStats={updateStats} players={homeColumn["Court"]}/>
+                    </Paper>
                 </div>
-                <Paper style={{minWidth: "900px",padding: "1px"}}>
-                    <TeamStatsTable team="home" updateStats={updateStats} players={homeColumn["Court"]}/>
-                </Paper>
-            </div>
-            <div className="stat-container">
-                <div className="team-container">
-                    <h5 className="team-name">{props.match.awayTeamName}</h5>
-                    <div className="team-bench">
-                        <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
-                    </div>
-                </div>    
-                <Paper style={{minWidth: "900px",padding: "1px"}}>
-                    <TeamStatsTable team="away" updateStats={updateStats} players={awayColumn["Court"]}/>
-                </Paper>
-            </div>
-        </form>
+                <div className="stat-container">
+                    <div className="team-container">
+                        <h5 className="team-name">{props.match.awayTeamName}</h5>
+                        <div className="team-bench">
+                            <Bench team="away" onDragEnd={onDragEnd} columns={awayColumn}/>
+                        </div>
+                    </div>    
+                    <Paper style={{minWidth: "900px",padding: "1px"}}>
+                        <TeamStatsTable team="away" updateStats={updateStats} players={awayColumn["Court"]}/>
+                    </Paper>
+                </div>
+            </form>
+            <ConfirmModal submitHandler={submitHandler} handleClose={handleClose} open={open} />
+        </>
     )
+}
+
+const mapDispatchToProps = dispatch => {
+    const combinedActions = {
+        saveStat,
+    }
+    return bindActionCreators(combinedActions, dispatch);
 }
 
 const mapStateToProps = (state) => ({
     match: state.matchReducer
   })
   
-export default connect(mapStateToProps, null)(StatSheet);
+export default connect(mapStateToProps, mapDispatchToProps)(StatSheet);

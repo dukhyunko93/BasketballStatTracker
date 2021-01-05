@@ -12,7 +12,7 @@ const TeamContainer = styled.div`
 `
 
 function ExportPage({ match }){
-
+    console.log(match)
     const homeStat = {
         name: match.homeTeamName,
         players: match.homeTeamPlayers,

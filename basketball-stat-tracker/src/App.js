@@ -15,7 +15,7 @@ const App = () => {
             <Switch>
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
-                <Route exact path="/statsheet" render={() => <StatSheet new/>} />
+                <Route exact path="/statsheet" render={() => <StatSheet />} />
                 <Route exact path="/exportpage" render={() => <ExportPage />} />
             </Switch>
             <Footer />

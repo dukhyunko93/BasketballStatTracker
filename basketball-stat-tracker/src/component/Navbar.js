@@ -13,6 +13,8 @@ const HomeTypography = styled(Typography)`
 `
 
 function NavBar() {
+    const savedMatch = JSON.parse(localStorage.getItem("match"))
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -56,12 +58,12 @@ function NavBar() {
                             New Match Form
                         </MenuItem>
                     </Link>
-                    {localStorage.getItem("match") ? 
+                    { savedMatch ? 
                     <Link style={{ textDecoration: 'none', color:'black'}} to={{pathname: "/statsheet"}}>
                         <MenuItem>
                             Continue Last Match
                         </MenuItem>
-                    </Link> : null}
+                    </Link> : null }
                 </Menu>
             </Toolbar>
         </AppBar>

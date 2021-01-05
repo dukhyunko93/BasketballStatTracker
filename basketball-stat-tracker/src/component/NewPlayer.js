@@ -32,11 +32,11 @@ export default function NewPlayer (props){
             <BoxContainer>
                 <TextFieldControl>
                     <InputLabel>First Name</InputLabel>
-                    <Input name="firstName" value={props.firstName} onChange={onChange} />
+                    <Input autoComplete="new" name="firstName" value={props.firstName} onChange={onChange} />
                 </TextFieldControl>                                
                 <TextFieldControl>
                     <InputLabel>Last Name</InputLabel>
-                    <Input name="lastName" value={props.lastName} onChange={onChange} />
+                    <Input autoComplete="new" name="lastName" value={props.lastName} onChange={onChange} />
                 </TextFieldControl>
                 <TextFieldControl>
                     <InputLabel>Jersey #</InputLabel>
