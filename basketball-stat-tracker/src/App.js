@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import Navbar from './component/Navbar'
 import Footer from './component/Footer'
@@ -10,16 +10,16 @@ import ExportPage from './container/ExportPage'
 
 const App = () => {
     return (
-        <>
+        <BrowserRouter>
             <Navbar /> 
-            <Router>
+            <Switch>
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/newmatchform" render={() => <NewMatchForm />} />
-                <Route exact path="/statsheet" render={() => <StatSheet />} />
+                <Route exact path="/statsheet" render={() => <StatSheet new/>} />
                 <Route exact path="/exportpage" render={() => <ExportPage />} />
-            </Router>
+            </Switch>
             <Footer />
-        </>
+        </BrowserRouter>
     );
 }
 

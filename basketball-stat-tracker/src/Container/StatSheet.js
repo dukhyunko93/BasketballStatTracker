@@ -1,31 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
 import "./StatSheet.css";
 import { Paper, Button } from "@material-ui/core";
 import Bench from "../component/Bench";
 import ScoreBox from "../component/ScoreBox"
 import TeamStatsTable from "../component/TeamStatsTable"
+import ConfirmModal from "../component/StatConfirmModal"
 
 function StatSheet(props){
-    const homeInfo = {
-        "Court":[],
-        "Bench": props.match.homeTeamPlayers,
-    }
+    // opens and closes modal
+    const [open, setOpen] = React.useState(false);
     
-    const awayInfo = {
-        "Court":[],
-        "Bench": props.match.awayTeamPlayers,
-    }
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    
+      const handleClose = () => {
+        setOpen(false);
+    };
+    
+    const match = JSON.parse(localStorage.getItem("match"))
 
-    const score = {
-        homeTeamScore: props.match.homeTeamScore,
-        awayTeamScore: props.match.awayTeamScore
-    }
+    const homeInfo = match ? 
+        match.homeInfo :
+        {
+            "Court":[],
+            "Bench": props.match.homeTeamPlayers,
+        }
     
-    const [homeColumn, setHomeColumns] = useState(JSON.parse(sessionStorage.getItem("homeInfo")) || homeInfo);
-    const [awayColumn, setAwayColumns] = useState(JSON.parse(sessionStorage.getItem("awayInfo")) || awayInfo);
-    const [scoreBoard, setScoreBoard] = useState(JSON.parse(sessionStorage.getItem("score")) || score);
+    const awayInfo = match ? 
+        match.awayInfo :
+        {
+            "Court":[],
+            "Bench": props.match.awayTeamPlayers,
+        }
+
+    const score = match ? 
+        match.score :
+        {
+            homeTeamScore: props.match.homeTeamScore,
+            awayTeamScore: props.match.awayTeamScore
+        }
+    
+    const [homeColumn, setHomeColumns] = useState(homeInfo);
+    const [awayColumn, setAwayColumns] = useState(awayInfo);
+    const [scoreBoard, setScoreBoard] = useState(score);
 
     const updateStats = (team, scoreDifference) => {
         if (team === "home"){
@@ -82,16 +101,29 @@ function StatSheet(props){
         }
     };
 
+    const submitHandler = () => {
+
+    }
+
     useEffect(() => {
-        sessionStorage.setItem("score", JSON.stringify(scoreBoard));
-        sessionStorage.setItem("homeInfo", JSON.stringify(homeColumn));
-        sessionStorage.setItem("awayInfo", JSON.stringify(awayColumn));
+        let match = {
+            score: scoreBoard,
+            homeInfo: homeColumn,
+            awayInfo: awayColumn,
+        }
+        localStorage.setItem("match", JSON.stringify(match));
+
+        return function() {
+            localStorage.setItem("match", null);
+        }
     });
     
     return(
-        <div className="container" >
+        <form onSubmit={submitHandler} className="container" >
+            <ConfirmModal handleClose={handleClose} open={open} />
             <ScoreBox homeTeamScore={scoreBoard.homeTeamScore} awayTeamScore={scoreBoard.awayTeamScore} />
-            <Button component={ Link } to="/exportpage" >
+            {/* <Button component={ Link } to="/exportpage" > */}
+            <Button onClick={handleOpen} >
                 Submit
             </Button>
             <div className="stat-container">
@@ -116,7 +148,7 @@ function StatSheet(props){
                     <TeamStatsTable team="away" updateStats={updateStats} players={awayColumn["Court"]}/>
                 </Paper>
             </div>
-        </div>
+        </form>
     )
 }
 

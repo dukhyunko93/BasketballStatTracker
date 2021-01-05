@@ -7,7 +7,6 @@ const ScoreBoard = styled.div`
 `
 
 export default function ScoreBox({homeTeamScore, awayTeamScore}){
-    console.log("[[score box]]",homeTeamScore,awayTeamScore)
     return(
         <div>
             <ScoreBoard>

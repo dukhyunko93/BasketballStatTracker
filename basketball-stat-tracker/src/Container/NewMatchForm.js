@@ -7,7 +7,7 @@ import './NewMatchForm.css';
 import NewTeamForm from '../component/NewTeamForm';
 import {Button} from '@material-ui/core';
 import nextId from "react-id-generator";
-// import matchExample from "../component/TeamExample";
+import matchExample from "../component/TeamExample";
 
 let htmlId = nextId();
 
@@ -32,7 +32,7 @@ const INITIAL_PLAYER_STATE = {
         PF: 0,
         PTS: 0,
     }
-}
+}    
 
 function NewMatchForm(props){
 
@@ -69,20 +69,22 @@ function NewMatchForm(props){
     }
 
     // testing with repopulated data
-    // const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
-    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
-    // const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
-    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
+    const [homeTeamName, setHomeTeamName] = useState(matchExample.homeTeam);
+    const [homeTeamPlayers, setHomeTeamPlayers] = useState(matchExample.homeTeamPlayers);
+    const [awayTeamName, setAwayTeamName] = useState(matchExample.awayTeam);
+    const [awayTeamPlayers, setAwayTeamPlayers] = useState(matchExample.awayTeamPlayers);
 
     // // empty data
-    const [homeTeamName, setHomeTeamName] = useState(sessionStorage.getItem("homeTeamName") || "");
-    const [homeTeamPlayers, setHomeTeamPlayers] = useState(JSON.parse(sessionStorage.getItem("homeTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
-    const [awayTeamName, setAwayTeamName] = useState(sessionStorage.getItem("awayTeamName") || "");
-    const [awayTeamPlayers, setAwayTeamPlayers] = useState(JSON.parse(sessionStorage.getItem("awayTeamPlayers")) || [ INITIAL_PLAYER_STATE ]);
+    const teamInfo = JSON.parse(localStorage.getItem("teamInfo"))
+    // const [homeTeamName, setHomeTeamName] = useState(teamInfo ? teamInfo.homeTeamName : "");
+    // const [homeTeamPlayers, setHomeTeamPlayers] = useState(teamInfo ? teamInfo.homeTeamPlayers : [ INITIAL_PLAYER_STATE ]);
+    // const [awayTeamName, setAwayTeamName] = useState(teamInfo ? teamInfo.awayTeamName : "");
+    // const [awayTeamPlayers, setAwayTeamPlayers] = useState(teamInfo ? teamInfo.awayTeamPlayers : [ INITIAL_PLAYER_STATE ]);
 
     const [redirect, setRedirect] = useState(false);
 
     const submitHandler = (e) => {
+        e.preventDefault()
         props.saveMatch({
             homeTeamName: homeTeamName,
             homeTeamPlayers: homeTeamPlayers,
@@ -90,14 +92,20 @@ function NewMatchForm(props){
             awayTeamPlayers: awayTeamPlayers,
         })
         setRedirect(true)
-        e.preventDefault()
     }
 
     useEffect(() => {
-        sessionStorage.setItem("homeTeamName", homeTeamName);
-        sessionStorage.setItem("homeTeamPlayers", JSON.stringify(homeTeamPlayers));
-        sessionStorage.setItem("awayTeamName", awayTeamName);
-        sessionStorage.setItem("awayTeamPlayers", JSON.stringify(awayTeamPlayers));
+        let teams = {
+            homeTeamName: homeTeamName,
+            homeTeamPlayers: homeTeamPlayers,
+            awayTeamName: awayTeamName,
+            awayTeamPlayers: awayTeamPlayers,
+        }
+        localStorage.setItem("teamInfo", JSON.stringify(teams));
+
+        return function() {
+            localStorage.setItem("teamInfo", null);
+        }
     });
     
     if (redirect) {
@@ -105,8 +113,8 @@ function NewMatchForm(props){
     }
 
     return (
-        <form onSubmit={(e) => submitHandler(e)} className="new-match-form">
-            <div>
+        <>
+            <form onSubmit={(e) => submitHandler(e)} className="new-match-form">
                 <div className="team-form-container">
                     <div className="team-form">
                         <NewTeamForm
@@ -131,11 +139,11 @@ function NewMatchForm(props){
                         />
                     </div>
                 </div>
-            </div>
-            <div id="submit-btn">
-                <Button type="submit" >Submit Teams</Button>
-            </div>
-        </form>
+                <div id="submit-btn">
+                    <Button type="submit" >Submit Teams</Button>
+                </div>
+            </form>
+        </>
     );
 }
 
