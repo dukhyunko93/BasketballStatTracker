@@ -2,8 +2,7 @@ import React, {useState} from "react"
 import FinalBoxScore from "../component/FinalBoxScore"
 import styled from "styled-components";
 import { connect } from 'react-redux'
-import ExportExcel from '../component/ExportExcel' 
-import { Button } from '@material-ui/core/';
+import ExportExcel from '../component/ExportExcel'
 
 const TeamContainer = styled.div`
     width: 100% !important;
