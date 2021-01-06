@@ -48,8 +48,6 @@ function StatSheet(props){
     const [homeColumn, setHomeColumns] = useState(homeInfo);
     const [awayColumn, setAwayColumns] = useState(awayInfo);
     const [scoreBoard, setScoreBoard] = useState(score);
-    
-    console.log(props)
 
     const updateStats = (team, scoreDifference) => {
         if (team === "home"){

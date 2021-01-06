@@ -3,16 +3,26 @@ import FinalBoxScore from "../component/FinalBoxScore"
 import styled from "styled-components";
 import { connect } from 'react-redux'
 import ExportExcel from '../component/ExportExcel' 
+import { Button } from '@material-ui/core/';
 
 const TeamContainer = styled.div`
     width: 100% !important;
     text-align: center;
     width: fit-content;
     padding: 10px;
+    button{
+        color: rgba(0, 0, 0, 0.87);
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        font-weight: 500;
+        line-height: 3vh;
+        letter-spacing: 0.02857em;
+        margin-right: 2vh;
+        margin-left: 2vh;
+    }
 `
 
 function ExportPage({ match }){
-    console.log(match)
+
     const homeStat = {
         name: match.homeTeamName,
         players: match.homeTeamPlayers,
